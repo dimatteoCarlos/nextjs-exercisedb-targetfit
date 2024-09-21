@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-.hoverText:hover{
-  /*text-amber-500*/
-    color: #f59e0b;
-    /* color:rgb(242, 117, 72); */
+body {
+  margin: auto;
+  background-color: transparent;
 
 }
+
+.hoverText:hover {
+/*tailwind: text-amber-500*/
+  color: #f59e0b;
+  /* color:rgb(242, 117, 72); */
+}
+
+
+/*sm: 640px
+md: 768px
+lg: 1024px
+xl: 1280px
+2xl: 1536px*/

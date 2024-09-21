@@ -69,7 +69,7 @@ function ThemeContextProvider({ children }: ThemeContextProviderPropsType) {
     <ThemeContext.Provider value={{ theme, changeTheme }}>
       <section
         className={
-          'dark:text-gray-200 dark:bg-gray-900 min-h-screen mx-auto max-w-6xl select-none transition-colors duration-300 text-gray-900 bg-gray-200}'
+          'dark:text-gray-200 dark:bg-gray-900 min-h-screen mx-auto max-w-6xl select-none transition-colors duration-300 text-gray-900  bg-gray-300}' //bg-gray-300 it d'snt work
         }
         
         // className={`${darkStyle} min-h-screen select-none transition-colors duration-300 ${lightStyle}`}
