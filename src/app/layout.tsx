@@ -12,7 +12,9 @@ const font = Josefin_Sans({ subsets: ['latin'] });
 
 const appNames=['TargetfiT','TargetMuscleFit',
   'muscleTune', 'CoreFitment', 'MuscleScope','TargetFlexion','fitAlign','FitMuscleXercise','targetflEx','TargetFleXrcise','muscleXercise','TargetXercise' ]
-  const titleApp=appNames[Math.floor(Math.random()*(appNames.length-1))]
+
+  // const titleApp=appNames[Math.floor(Math.random()*(appNames.length-1))]
+  const titleApp='TargetfiT'
 
 export const metadata: Metadata = {
   title: `${titleApp}: fit the right muscle with the right exercise routine`,

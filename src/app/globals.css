@@ -10,9 +10,34 @@ body {
 
 .hoverText:hover {
 /*tailwind: text-amber-500*/
-  color: #f59e0b;
-  /* color:rgb(242, 117, 72); */
+  /* color: #f59e0b; */
+  color:rgb(242, 117, 72);
 }
+
+.scroll-menu-wrapper {
+  display: flex;
+  overflow-x: auto; /* Permitir desplazamiento horizontal */
+  padding: 1rem; /* Espaciado interno */
+
+}
+
+.scroll-menu-wrapper::-webkit-scrollbar {
+  height: 0.75rem; /* Altura de la barra de desplazamiento */
+}
+
+.scroll-menu-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+  background: #D97706; /* Color del pulgar de la barra de desplazamiento */
+width:8px;
+}
+
+.scroll-menu-wrapper::-webkit-scrollbar-track {
+  background: #374151; /* Color de fondo de la pista */
+  background: #4B5563; /* Color de fondo de la pista */
+}
+
+
+
 
 
 /*sm: 640px

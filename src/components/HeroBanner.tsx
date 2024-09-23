@@ -2,34 +2,26 @@
 import React, { useEffect } from 'react';
 // import { useTitleApp } from '@/context/ThemeContextProvider';
 
-const HeroBanner = () => {
-  const banners = [
-    '/banner.jpg',
-    '/banner_1.png',
-    '/banner_2.png',
-    '/banner_3.png',
-  ];
+type HeroBannerPropsType = { bannerImage: string };
 
-  const randomBannerImage = banners[Math.floor(Math.random() * banners.length)];
-
-  const bannerImage = randomBannerImage;
-
+const HeroBanner = ({ bannerImage }: HeroBannerPropsType) => {
   return (
     <>
       <div
         className='banner
-         flex
-         justify-between h-full  w-full pl-3
-         max-sm:flex-col max-sm:justify-center max-sm:items-center max-sm:p-1
+         flex lg:h-[580px]
+         justify-between h-full  w-full pl-3 pb-0
+         max-md:flex-col max-md:justify-center max-md:items-center max-md:p-0
          dark:text-gray-200 dark:bg-gray-700 
+             lg:relative
       '
       >
         <div
           className='banner-L 
         flex flex-col flex-3/5
         min-w-[50%]
-        max-sm:justify-center max-sm:items-center
-        max-sm:w-full max-sm:p-1 max-sm:text-[2rem]
+        max-md:justify-center max-md:items-center
+        max-md:w-full max-md:p-0 max-md:text-[2rem]
         '
         >
           <h1
@@ -55,7 +47,7 @@ const HeroBanner = () => {
             className='
           text-[1.375rem] 
           leading-[35px]
-          max-sm:text-center
+          max-md:text-center
           '
           >
             Fit the right muscle with the right exercise routine
@@ -67,10 +59,8 @@ const HeroBanner = () => {
           text-center text-[0.875rem]  p-2 px-2  
           
           rounded-md inline-block mt-[1.5rem] mb-[1rem]  
-          cursor-pointer bg-amber-600 hover:bg-amber-700 
-
-          lg:relative
-          '
+          cursor-pointer bg-amber-600 hover:bg-amber-700
+           '
           >
             <a
               href='#exercises'
@@ -83,7 +73,7 @@ const HeroBanner = () => {
 
           <h1
             className='hidden lg:block font-bold text-[10rem] text-red-400 opacity-15 dark:text-white
-               md:absolute lg:bottom-[26%] 
+               md:absolute lg:top-[65%] 
           '
           >
             Exercise
@@ -93,22 +83,16 @@ const HeroBanner = () => {
         <div
           className='banner-R  flex-2/5
           max-w-[50%]
-          sm:min-h-[31.6rem]
-          max-sm:min-w-full 
-            
+          md:min-h-[31.6rem]
+          max-md:min-w-full 
         '
         >
           <img
-            // src={bannerImage}
             src={`${bannerImage}`}
             alt='hero-banner'
             className='object-cover 
             h-full w-full max-w-full
-          
-           sm:rounded-bl-[30%]
-           max-sm:rounded-lg
-         
-           
+             md:rounded-bl-[12%]        
             '
           />
         </div>

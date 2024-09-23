@@ -1,4 +1,3 @@
-import { JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';
 import React from 'react';
 import { IconType } from 'react-icons';

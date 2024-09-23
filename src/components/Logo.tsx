@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { IconType } from 'react-icons';
 
 type LogoPropsType = {
   title: string;
@@ -10,7 +9,6 @@ type LogoPropsType = {
 };
 
 function Logo({ title, logo, route }: LogoPropsType) {
-
   return (
     <>
       <Link

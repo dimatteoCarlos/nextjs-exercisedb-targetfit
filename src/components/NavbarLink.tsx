@@ -12,8 +12,6 @@ function NavbarLink({ param, title }: NavbarLinkPropsType) {
   const genre = params.get('genre');
   const route = `/?genre=${param}`;
 
-        //  hoverText dark:text-gray-200 
-
   return (
     <div>
       <Link
