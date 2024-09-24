@@ -76,8 +76,8 @@ export const equipmentListImg = {
   assisted: { name: 'assisted', img: '/images/equipment/back_eqp.gif' },
   band: { name: 'band', img: '/images/equipment/back_eqp.gif' },
   barbell: { name: 'barbell', img: '/images/equipment/back_eqp.gif' },
-  body_weight: { name: 'body weight', img: '/images/cardio_eqp.gif' },
-  bosu_ball: { name: 'bosu ball', img: '/images/cardio_eqp.gif' },
+  body_weight: { name: 'body weight', img: '/images/equipment/cardio_eqp.gif' },
+  bosu_ball: { name: 'bosu ball', img: '/images/equipment/cardio_eqp.gif' },
   cable: { name: 'cable', img: '/images/equipment/back_eqp.gif' },
   elliptical_machine: {
     name: 'elliptical machine',
@@ -87,24 +87,57 @@ export const equipmentListImg = {
   ez_barbell: { name: 'ez barbell', img: '/images/equipment/back_eqp.gif' },
   hammer: { name: 'hammer', img: '/images/equipment/back_eqp.gif' },
   kettlebell: { name: 'kettlebell', img: '/images/equipment/back_eqp.gif' },
-  leverage_machine: { name: 'leverage machine', img: '/images/cardio_eqp.gif' },
-  medicine_ball: { name: 'medicine ball', img: '/images/cardio_eqp.gif' },
-  olympic_barbell: { name: 'olympic barbell', img: '/images/cardio_eqp.gif' },
-  resistance_band: { name: 'resistance band', img: '/images/cardio_eqp.gif' },
+  leverage_machine: {
+    name: 'leverage machine',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  medicine_ball: {
+    name: 'medicine ball',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  olympic_barbell: {
+    name: 'olympic barbell',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  resistance_band: {
+    name: 'resistance band',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
   roller: { name: 'roller', img: '/images/equipment/back_eqp.gif' },
   rope: { name: 'rope', img: '/images/equipment/back_eqp.gif' },
-  skierg_machine: { name: 'skierg machine', img: '/images/cardio_eqp.gif' },
-  sled_machine: { name: 'sled machine', img: '/images/cardio_eqp.gif' },
-  smith_machine: { name: 'smith machine', img: '/images/cardio_eqp.gif' },
-  stability_ball: { name: 'stability ball', img: '/images/cardio_eqp.gif' },
-  stationary_bike: { name: 'stationary bike', img: '/images/cardio_eqp.gif' },
-  stepmill_machine: { name: 'stepmill machine', img: '/images/cardio_eqp.gif' },
+  skierg_machine: {
+    name: 'skierg machine',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  sled_machine: {
+    name: 'sled machine',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  smith_machine: {
+    name: 'smith machine',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  stability_ball: {
+    name: 'stability ball',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  stationary_bike: {
+    name: 'stationary bike',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
+  stepmill_machine: {
+    name: 'stepmill machine',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
   tire: { name: 'tire', img: '/images/equipment/back_eqp.gif' },
-  trap_bar: { name: 'trap bar', img: '/images/cardio_eqp.gif' },
+  trap_bar: { name: 'trap bar', img: '/images/equipment/cardio_eqp.gif' },
   upper_body_ergometer: {
     name: 'upper body ergometer',
-    img: '/images/cardio_eqp.gif',
+    img: '/images/equipment/cardio_eqp.gif',
   },
   weighted: { name: 'weighted', img: '/images/equipment/back_eqp.gif' },
-  wheel_roller: { name: 'wheel roller', img: '/images/cardio_eqp.gif' },
+  wheel_roller: {
+    name: 'wheel roller',
+    img: '/images/equipment/cardio_eqp.gif',
+  },
 };
