@@ -19,19 +19,19 @@ export const youtubeOptions = {
   method: 'GET',
   headers: {
     'x-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com',
-    'x-RapidAPI-Key': 'f0021db587msh781fb1cbef39856p11c183jsn45521d5d1c85',
+    'x-RapidAPI-Key': API_KEY_EXERCISE as string,
   },
 };
 //-------------------
 
 export async function fetchData<D>(
   url: string,
-  backupData?: D[] | null
-): Promise<D[] | undefined> {
+  backupData: D[]
+): Promise<D[] | []> {
   try {
     const res: Response = await fetch(url, exerciseOptions);
     // const data = await res.json();
-    const data = res.ok ? await res.json() : (backupData as D[]);
+    const data = res.ok ? await res.json() : backupData ?? [];
 
     if (!res.ok && data) {
       console.log('Failed to fetch data so backup data is shown');
@@ -45,6 +45,7 @@ export async function fetchData<D>(
     return data;
   } catch (error: unknown) {
     console.error('Fetch error:', error);
+    return backupData ?? [];
   }
 }
 

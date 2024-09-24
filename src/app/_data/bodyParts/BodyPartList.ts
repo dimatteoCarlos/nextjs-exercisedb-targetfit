@@ -77,58 +77,71 @@ export const equipmentList = [
 //   { bodyPart: 'neck', img: '' },
 // ];
 
-export type BodyPartListGifType = {
-  [key: string]: { bodyPart: string; img: string };
+export type BodyPartListImgType = {
+  [key: string]: { name: string; img: string };
 };
 
-export const bodyPartListGif: BodyPartListGifType = {
-  back: { bodyPart: 'back', img: 'back.gif' },
-  cardio: { bodyPart: 'cardio', img: 'cardio.gif' },
-  chest: { bodyPart: 'chest', img: 'chest.gif' },
-  lower_arms: { bodyPart: 'lower arms', img: 'lower_arms.gif' },
-  lower_legs: { bodyPart: 'lower legs', img: 'lower_legs.gif' },
-  shoulders: { bodyPart: 'shoulders', img: 'shoulders.gif' },
-  upper_arms: { bodyPart: 'upper arms', img: 'upper_arms.gif' },
-  upper_legs: { bodyPart: 'upper legs', img: 'upper_legs.gif' },
-  waist: { bodyPart: 'waist', img: 'waist.gif' },
-  neck: { bodyPart: 'neck', img: '' },
+export const bodyPartListImg: BodyPartListImgType = {
+  back: { name: 'back', img: 'back.gif' },
+  cardio: { name: 'cardio', img: 'cardio.gif' },
+  chest: { name: 'chest', img: 'chest.gif' },
+  lower_arms: { name: 'lower arms', img: 'lower_arms.gif' },
+  lower_legs: { name: 'lower legs', img: 'lower_legs.gif' },
+  shoulders: { name: 'shoulders', img: 'shoulders.gif' },
+  upper_arms: { name: 'upper arms', img: 'upper_arms.gif' },
+  upper_legs: { name: 'upper legs', img: 'upper_legs.gif' },
+  waist: { name: 'waist', img: 'waist.gif' },
+  neck: { name: 'neck', img: '' },
+};
+
+export const bodyPartListGif: BodyPartListImgType = {
+  back: { name: 'back', img: 'back.gif' },
+  cardio: { name: 'cardio', img: 'cardio.gif' },
+  chest: { name: 'chest', img: 'chest.gif' },
+  lower_arms: { name: 'lower arms', img: 'lower_arms.gif' },
+  lower_legs: { name: 'lower legs', img: 'lower_legs.gif' },
+  shoulders: { name: 'shoulders', img: 'shoulders.gif' },
+  upper_arms: { name: 'upper arms', img: 'upper_arms.gif' },
+  upper_legs: { name: 'upper legs', img: 'upper_legs.gif' },
+  waist: { name: 'waist', img: 'waist.gif' },
+  neck: { name: 'neck', img: '' },
 };
 
 export const bodyPartListJpg = {
-  back: { bodyPart: 'back', img: 'back.jpg' },
-  cardio: { bodyPart: 'cardio', img: '' },
-  chest: { bodyPart: 'chest', img: 'chest.jpg' },
-  lower_arms: { bodyPart: 'lower arms', img: '' },
-  lower_legs: { bodyPart: 'lower legs', img: '' },
-  shoulders: { bodyPart: 'shoulders', img: '' },
-  upper_arms: { bodyPart: 'upper arms', img: 'upper_arms.jpg' },
-  upper_legs: { bodyPart: 'upper legs', img: '' },
-  waist: { bodyPart: 'waist', img: 'waist.jpg' },
-  neck: { bodyPart: 'neck', img: 'neck.jpg' },
+  back: { name: 'back', img: 'back.jpg' },
+  cardio: { name: 'cardio', img: '' },
+  chest: { name: 'chest', img: 'chest.jpg' },
+  lower_arms: { name: 'lower arms', img: '' },
+  lower_legs: { name: 'lower legs', img: '' },
+  shoulders: { name: 'shoulders', img: '' },
+  upper_arms: { name: 'upper arms', img: 'upper_arms.jpg' },
+  upper_legs: { name: 'upper legs', img: '' },
+  waist: { name: 'waist', img: 'waist.jpg' },
+  neck: { name: 'neck', img: 'neck.jpg' },
 };
 
 export const bodyPartListPng = [
-  { bodyPart: 'back', img: 'back.png' },
-  { bodyPart: 'cardio', img: '' },
-  { bodyPart: 'chest', img: '' },
-  { bodyPart: 'lower arms', img: '' },
-  { bodyPart: 'lower legs', img: 'lower_legs.png' },
-  { bodyPart: 'shoulders', img: '' },
-  { bodyPart: 'upper arms', img: 'upper_arms.png' },
-  { bodyPart: 'upper legs', img: 'upper_legs.png' },
-  { bodyPart: 'waist', img: 'waist.png' },
-  { bodyPart: 'neck', img: 'neck.png' },
+  { name: 'back', img: 'back.png' },
+  { name: 'cardio', img: '' },
+  { name: 'chest', img: '' },
+  { name: 'lower arms', img: '' },
+  { name: 'lower legs', img: 'lower_legs.png' },
+  { name: 'shoulders', img: '' },
+  { name: 'upper arms', img: 'upper_arms.png' },
+  { name: 'upper legs', img: 'upper_legs.png' },
+  { name: 'waist', img: 'waist.png' },
+  { name: 'neck', img: 'neck.png' },
 ];
 
 export const bodyPartListEqp = [
-  { bodyPart: 'back', img: 'back_eqp.gif' },
-  { bodyPart: 'cardio', img: 'cardio_eqp.gif' },
-  { bodyPart: 'chest', img: 'chest_eqp.gif' },
-  { bodyPart: 'lower arms', img: '' },
-  { bodyPart: 'lower legs', img: 'lower_legs_eqp.gif' },
-  { bodyPart: 'shoulders', img: 'shoulders_eqp.gif' },
-  { bodyPart: 'upper arms', img: 'upper_arms_eqp.gif' },
-  { bodyPart: 'upper legs', img: 'upper_legs_eqp.gif' },
-  { bodyPart: 'waist', img: 'waist_eqp.gif' },
-  { bodyPart: 'neck', img: '' },
+  { name: 'back', img: 'back_eqp.gif' },
+  { name: 'cardio', img: 'cardio_eqp.gif' },
+  { name: 'chest', img: 'chest_eqp.gif' },
+  { name: 'lower arms', img: '' },
+  { name: 'lower legs', img: 'lower_legs_eqp.gif' },
+  { name: 'shoulders', img: 'shoulders_eqp.gif' },
+  { name: 'upper arms', img: 'upper_arms_eqp.gif' },
+  { name: 'upper legs', img: 'upper_legs_eqp.gif' },
+  { name: 'waist', img: 'waist_eqp.gif' },
+  { name: 'neck', img: '' },
 ];

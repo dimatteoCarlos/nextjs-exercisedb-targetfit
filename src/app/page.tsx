@@ -1,31 +1,30 @@
 'use server';
 import HeroBanner from '@/components/HeroBanner';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
+import { bodyPartList, targetList, equipmentList } from './_data/dataList';
+
 import {
-  bodyPartList,
-  bodyPartListGif,
-  BodyPartListGifType,
-} from './_data/bodyParts/BodyPartList';
-
-import equipmentList from './_data/equipment/equipmentList.json';
-
-import targetList from './_data/targets/targetList.json';
+  bodyPartListImg,
+  targetListImg,
+  equipmentListImg,
+} from './_data/imageList';
 
 import exercisesBackup from './_data/exercises/exercises10.json';
 
-
 import ShowListMenu from '@/components/ShowListMenu';
 
-
-export type ListType = {
-  ItemName: string;
-  ItemImage: string;
+//---------------------
+export type ListItemType = {
+  name: string;
+  img: string;
 };
 
-export type BodyPartListType = {
-  bodyPartName: string;
-  bodyPartImage: string;
+export type ListImgType = {
+  [key: string]: { img: string };
 };
+// export type ListImgType = {
+//   [key: string]: { name: string; img: string } | {}[];
+// };
 
 export type ExerciseDataType = {
   id: string;
@@ -40,50 +39,75 @@ export type ExerciseDataType = {
 
 export type SearchParamsType = {
   searchParams: {
-    genre: 'bodyPart' | 'equipment' | 'targetMuscle' | 'explore';
+    genre: 'bodyPart' | 'equipment' | 'targetMuscle';
+    //  | 'explore' | 'start';
   };
 };
 
+//-------------------------------c
 const menBannersKeyList = {
-  bodyPart: '/bannerMenBodyParts.png',
-  equipment: '/bannerMenEquipment.png',
-  targetMuscle: '/bannerExplore.png',
-  explore: '/bannerMenTargetMuscle.png',
+  bodyPart: '/images/banners/bannerManBodyParts.png',
+  equipment: '/images/banners/bannerMenEquipment.png',
+  targetMuscle: '/images/banners/bannerExplore.png',
+  explore: '/images/banners/bannerMenTargetMuscle.png',
+  start: '/images/banners/bannerMenTargetMuscle.png',
 };
 const womenBannersKeyList = {
-  bodyPart: '/bannerWomenBodyParts.png',
-  equipment: '/bannerWomenEquipment.png',
-  explore: '/bannerExplorer.png',
-  targetMuscle: '/bannerWomenTargetMuscle.png',
+  bodyPart: '/images/banners/bannerWomenBodyParts.png',
+  equipment: '/images/banners/bannerWomenEquipment.png',
+  explore: '/images/banners/bannerExplorer.png',
+  targetMuscle: '/images/banners/bannerWomenTargetMuscle.png',
+  start: 'bannerWomanBodyParts.png',
 };
 
 const BannersKeyList = {
-  // bodyPart: '/bannerMenBodyPart.png',
-  bodyPart: '/bannerWomanAndManBodyParts.png',
-  equipment: '/bannerWomenBodyParts.png',
-  explore: '/bannerMenTargetMuscle.png',
-  targetMuscle: '/bannerWomenTargetMuscle.png',
+  // bodyPart: '/images/banners/bannerMenBodyPart.png',
+  // bodyPart: '/images/banners/bannerWomanAndManBodyParts.png',
+  // bodyPart: '/images/banners/bannerHumanBodyParts_2.png',
+  bodyPart: '/images/banners/bannerMenTargetMuscle.png',
+  equipment: '/images/banners/bannerWomenBodyParts.png',
+  explore: '/images/banners/bannerWomenBodyParts.png',
+  targetMuscle: '/images/banners/bannerWomenTargetMuscle.png',
+  start: '/images/banners/bannerWomanAndManBodyParts.png',
 };
-
+//----------------------
 const endpointLists = {
   bodyPart: '/exercises/bodyPartList',
   equipment: '/exercises/equipmentList',
   targetMuscle: '/exercises/targetList',
-  explore: `/exercises?limit=20&offset=${Math.floor(
-    Math.random() * (1324 - 20)
-  )}`,
+  // explore: `/exercises?limit=20&offset=${Math.floor(
+  //   Math.random() * (1324 - 20)
+  // )}`,
+  // start: '',
 };
 
 const listDataBackup = {
   bodyPart: bodyPartList,
   equipment: equipmentList,
   targetMuscle: targetList,
-  explore: [],
+  // explore: {},
+  // start: {},
 };
 
+export type ListImgBackupType = {
+  bodyPart: ListImgType;
+  targetMuscle: ListImgType;
+  equipment: ListImgType;
+  // explore: ListImgType;
+  // start: ListImgType;
+};
+const listImgBackup = {
+  bodyPart: bodyPartListImg,
+  equipment: equipmentListImg,
+  targetMuscle: targetListImg,
+  // explore: {},
+  // start: {},
+};
+
+//--------------------c
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
-  const selectedKeyList = genre in BannersKeyList ? genre : 'explore';
+  const selectedKeyList = genre in BannersKeyList ? genre : 'bodyPart';
 
   //Request of listData from api
 
@@ -97,33 +121,27 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   //---bodyParts--------/
 
-  type BodyPartsArgType = {
-    list: string[];
-    bodyPartListGif: BodyPartListGifType; //pndte: volver a generar los data gif con estructura generica itemName and imageFileName
-  };
+  function constructListMenu(listName: string[], listImg: ListImgType) {
+    const listOfItems: ListItemType[] = Array.from(listName, (item: string) => {
+      const obj = {
+        name: item,
+        img:
+          listImg[item.split(' ').join('_')].img ?? '/images/notFoundImg.png',
+      };
 
-  // function bodyParts ({list, bodyPartListGif}:BodyPartsArgType):BodyPartListType[]{
-
-  function constructListMenu() {
-    const listOfItems: BodyPartListType[] = Array.from(
-      list!,
-      (bodyPart: string) => {
-        const obj = {
-          bodyPartName: bodyPart,
-          bodyPartImage:
-            bodyPartListGif[bodyPart.split(' ').join('_')].img ??
-            'not image found',
-        };
-
-        return { ...obj };
-      }
-    );
+      console.log({ obj });
+      return { ...obj };
+    });
+    console.log('listOfItems:', listOfItems);
     return listOfItems;
   }
   //-----------------
 
+  const listData =
+    selectedKeyList in listImgBackup && Array.isArray(list)
+      ? constructListMenu(list, listImgBackup[selectedKeyList])
+      : [];
 
-  const listData = selectedKeyList === 'bodyPart' ? constructListMenu() : [];
   console.log({ selectedKeyList });
 
   console.log({ listData });
@@ -133,37 +151,14 @@ export default async function Home({ searchParams }: SearchParamsType) {
     <>
       <HeroBanner bannerImage={BannersKeyList[selectedKeyList]} />
 
-      <div className='bodyPartListMenu '>
+      <div className='listMenu '>
+        {/* ListMenu */}
 
-        {/* BodyPartListMenu */}
+        <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
 
-
-
-        {selectedKeyList == 'bodyPart' &&
-        
-        <ShowListMenu list={listData} selectedKeyList={selectedKeyList}   />
-        
-      
-        
-        }
+        {/* {selectedKeyList == 'bodyPart' && (
+        )} */}
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </>
   );
 }

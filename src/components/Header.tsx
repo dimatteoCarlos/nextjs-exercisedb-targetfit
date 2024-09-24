@@ -18,7 +18,7 @@ function Header({ titleApp }: { titleApp: string }) {
 
   return (
     <header className='flex justify-between items-center w-full max-w-6xl mx-auto h-[4rem] px-3 py-5 gap-3 bg-transparent dark:text-gray-200 dark:bg-gray-700 '>
-      <Logo title={titleApp} logo={'/logoImg.png'} route={'/'}></Logo>
+      <Logo title={titleApp} logo={'/images/logoImg.png'} route={'/'}></Logo>
 
       <ThemeModeSwitch />
 

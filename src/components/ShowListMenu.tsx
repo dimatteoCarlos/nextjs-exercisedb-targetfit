@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import RightArrowIcon from '../../public/assets/icons/right-arrow.png';
 import LeftArrowIcon from '../../public/assets/icons/left-arrow.png';
-import { BodyPartListType, SearchParamsType } from '@/app/page';
+import { ListItemType, SearchParamsType } from '@/app/page';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
-// import exercisesBackup from './_data/exercises/exercises10.json';
-
-import exercisesBodyPartBackup from '../app/_data/bodyParts/BackExercises.json';
-import exercisesEquipmentBackup from '../app/_data/equipment/EquipmentExercisesData.json';
-import exercisesTargetBackup from '../app/_data/targets/exerciseTarget_target.json';
+import { backExercises } from '../app/_data/bodyParts/exercises/backExercises';
+// import exercisesBodyPartDataBackup from '../app/_data/bodyParts/BackExercises';
+import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
+import exercisesEquipmentDataBackup from '../app/_data/equipment/EquipmentExercisesData.json';
+import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_target.json';
 
 export type ExerciseDataType = {
   id: string;
@@ -21,22 +21,72 @@ export type ExerciseDataType = {
   secondaryMuscles: string[];
   instructions: string[];
 };
+export type ExerciseDataType1 = {
+  [key: string]: string | string[];
+};
+type endpointExercisesType = {
+  bodyPart: string;
+  equipment: string;
+  targetMuscle: string;
+  explore?: string;
+  start?: string;
+};
 
 type ShowListMenuPropType = {
-  list: BodyPartListType[];
+  list: ListItemType[];
   selectedKeyList: SearchParamsType['searchParams']['genre'];
 };
 
-function ShowListMenu({ list, selectedKeyList }: ShowListMenuPropType) {
+//---------------------------------
+const endpointExercises: endpointExercisesType = {
+  bodyPart: '/exercises/bodyPart/',
+  equipment: '/exercises/equipment/',
+  targetMuscle: '/exercises/target/',
+  explore: `/exercises/exercise/`,
+  start: `/exercises/exercise/`,
+};
+
+const exercisesDataBackupKey = {
+  bodyPart: 'backExercises', //exercisesBodyPartDataBackup,
+  // equipment: exercisesEquipmentDataBackup,
+  // targetMuscle: exercisesTargetDataBackup,
+  // explore: exerciseExploreDataBackup,
+};
+
+console.log({ exercisesDataBackupKey });
+//----------------------------------------
+function ShowListMenu({
+  list,
+  selectedKeyList,
+}: ShowListMenuPropType): React.JSX.Element {
   const [selectedListItem, setSelectedListItem] = useState<string | null>(null);
   // const [ExerciseData, setExerciseData] = useState(null);
 
-  const handleSelectedItem = (name: string) => {
+  const handleSelectedItem = async (name: string) => {
     console.log(name);
-    if (list.some((part) => part.bodyPartName === name)) {
+    if (list.some((item) => item.name === name)) {
       setSelectedListItem(name);
+      //------endpoint construction-------------
+      const urlQuery = `?limit=20&offset=${Math.floor(
+        Math.random() * (21 * 0)
+      )}`;
 
-    const exerciseData = fetchData<> (url, backupExercise)
+      //placeholder for explore and start
+      // selectedKeyList == 'explore'
+      //   ? ''
+      //   : `?limit=20&offset=${Math.floor(Math.random() * (21 * 0))}`;
+
+      const url = `${BASEURL_EXERCISEDB}${endpointExercises[selectedKeyList]}${selectedListItem}${urlQuery}`;
+
+      //CONFUSION EN MANEJO DE DATOA
+      const backupExercisesData = exercisesDataBackupArray[selectedKeyList];
+
+      const exercisesData = await fetchData<ExerciseDataType>(
+        url,
+        backupExercisesData
+      );
+
+      console.log('ExercisesData:', exercisesData);
     }
     //hacer el fetcha para obtener la data
     //setExerciseData(data)
@@ -44,21 +94,19 @@ function ShowListMenu({ list, selectedKeyList }: ShowListMenuPropType) {
 
   return (
     <>
-      {/* <div className='overflow-hidden'> */}
+      {/* Horizonal List Menu */}
       <div
         className=' scroll-menu-wrapper text-[0.9rem] lg:text-[1.0rem] md:text-[0.89rem]
            font-semibold text-[#3A1212] capitalize 
           grid  grid-cols-2 lg:grid-cols-6  md:grid-cols-4 sm:grid-cols-3
-          py-3 w-full overflow-x-auto
+          py-8 w-full overflow-x-auto
               dark:bg-gray-800 dark:text-gray-300 
            
               '
       >
-        {list.map((part, indx) => {
+        {list.map((item, indx) => {
           const imgUrl =
-            part.bodyPartImage !== ''
-              ? `/bodyPartImages/gif/${part.bodyPartImage}`
-              : `/bodyPartImages/jpg/${part.bodyPartName}.jpg`;
+            item.img !== '' || !item.img ? item.img : '/images/notFoundImg.png';
 
           return (
             <div
@@ -66,21 +114,21 @@ function ShowListMenu({ list, selectedKeyList }: ShowListMenuPropType) {
             flex flex-col justify-center items-center  gap-2 
             cursor-pointer p-1 mx-2 text-center 
             group sm:hover:shadow-slate-400 sm:shadow-md 
-            transition-shadow duration-200  
+            transition-shadow duration-200 
 
              ${
-               selectedListItem === part.bodyPartName
+               selectedListItem === item.name
                  ? ' border-[1px]  border-solid border-amber-600 rounded-lg z-1'
                  : ''
              }
 
             `}
               key={indx}
-              id={part.bodyPartName}
-              onClick={() => handleSelectedItem(part.bodyPartName)}
-              // style={{ boxShadow: selectedListItem === part.bodyPartName ? 'overline' : 'none' }}
+              id={item.name}
+              // onClick={() => handleSelectedItem(item.name)}
+              // style={{ boxShadow: selectedListItem === item.name ? 'overline' : 'none' }}
             >
-              {part.bodyPartName}
+              {item.name}
 
               <img
                 src={imgUrl}
@@ -89,7 +137,7 @@ function ShowListMenu({ list, selectedKeyList }: ShowListMenuPropType) {
 
                 group-hover:opacity-75 duration-300
                     '
-                alt={`body_part_${part.bodyPartName}`}
+                alt={`body_part_${item.name}`}
               />
             </div>
           );
