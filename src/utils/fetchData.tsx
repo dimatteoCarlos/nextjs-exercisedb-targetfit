@@ -23,14 +23,6 @@ export const youtubeOptions = {
   },
 };
 //-------------------
-type FetchDataPropsType<D> = {
-  url: string;
-  // options:{method:string, headers:{[key:string]:string}}
-  options: RequestInit;
-  data: D[] | null;
-  error: any | null;
-  backupData: D[];
-};
 
 export async function fetchData<D>(
   url: string,

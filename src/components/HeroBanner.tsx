@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-// import { useTitleApp } from '@/context/ThemeContextProvider';
+
 
 type HeroBannerPropsType = { bannerImage: string };
 

@@ -13,8 +13,14 @@ import targetList from './_data/targets/targetList.json';
 
 import exercisesBackup from './_data/exercises/exercises10.json';
 
-import { exerciseOptions } from '@/utils/fetchData';
+
 import ShowListMenu from '@/components/ShowListMenu';
+
+
+export type ListType = {
+  ItemName: string;
+  ItemImage: string;
+};
 
 export type BodyPartListType = {
   bodyPartName: string;
@@ -32,26 +38,28 @@ export type ExerciseDataType = {
   instructions: string[];
 };
 
-type SearchParamsType = {
+export type SearchParamsType = {
   searchParams: {
     genre: 'bodyPart' | 'equipment' | 'targetMuscle' | 'explore';
   };
 };
 
-const menBanners = {
+const menBannersKeyList = {
   bodyPart: '/bannerMenBodyParts.png',
   equipment: '/bannerMenEquipment.png',
   targetMuscle: '/bannerExplore.png',
   explore: '/bannerMenTargetMuscle.png',
 };
-const womenBanners = {
+const womenBannersKeyList = {
   bodyPart: '/bannerWomenBodyParts.png',
   equipment: '/bannerWomenEquipment.png',
   explore: '/bannerExplorer.png',
   targetMuscle: '/bannerWomenTargetMuscle.png',
 };
-const banners = {
-  bodyPart: '/bannerMenBodyPart.png',
+
+const BannersKeyList = {
+  // bodyPart: '/bannerMenBodyPart.png',
+  bodyPart: '/bannerWomanAndManBodyParts.png',
   equipment: '/bannerWomenBodyParts.png',
   explore: '/bannerMenTargetMuscle.png',
   targetMuscle: '/bannerWomenTargetMuscle.png',
@@ -61,7 +69,7 @@ const endpointLists = {
   bodyPart: '/exercises/bodyPartList',
   equipment: '/exercises/equipmentList',
   targetMuscle: '/exercises/targetList',
-  explore: `/exercises?limit=1&offset=${Math.floor(
+  explore: `/exercises?limit=20&offset=${Math.floor(
     Math.random() * (1324 - 20)
   )}`,
 };
@@ -75,16 +83,15 @@ const listDataBackup = {
 
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
+  const selectedKeyList = genre in BannersKeyList ? genre : 'explore';
 
-  // const selectedKey = genre in banners ? genre : 'explore';
-  const selectedKey = genre in womenBanners ? genre : 'explore';
+  //Request of listData from api
 
-  const url = `${BASEURL_EXERCISEDB}${endpointLists[selectedKey]}`;
-  const backupDataList = listDataBackup[selectedKey];
-
+  const url = `${BASEURL_EXERCISEDB}${endpointLists[selectedKeyList]}`;
+  const backupDataList = listDataBackup[selectedKeyList];
   const list = await fetchData<string>(url, backupDataList);
 
-  console.log('results:', list);
+  console.log('List:', list);
 
   //So far there'are only figures for body part list
 
@@ -92,13 +99,13 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   type BodyPartsArgType = {
     list: string[];
-    bodyPartListGif: BodyPartListGifType;
+    bodyPartListGif: BodyPartListGifType; //pndte: volver a generar los data gif con estructura generica itemName and imageFileName
   };
 
   // function bodyParts ({list, bodyPartListGif}:BodyPartsArgType):BodyPartListType[]{
 
-  function bodyParts() {
-    const bodyParts: BodyPartListType[] = Array.from(
+  function constructListMenu() {
+    const listOfItems: BodyPartListType[] = Array.from(
       list!,
       (bodyPart: string) => {
         const obj = {
@@ -111,26 +118,52 @@ export default async function Home({ searchParams }: SearchParamsType) {
         return { ...obj };
       }
     );
-    return bodyParts;
+    return listOfItems;
   }
+  //-----------------
 
-  const bodyPartListData = selectedKey === 'bodyPart' ? bodyParts() : [];
-  console.log({ selectedKey });
 
-  console.log({ bodyPartListData });
+  const listData = selectedKeyList === 'bodyPart' ? constructListMenu() : [];
+  console.log({ selectedKeyList });
+
+  console.log({ listData });
 
   //render
   return (
     <>
-      <HeroBanner bannerImage={banners[selectedKey]} />
+      <HeroBanner bannerImage={BannersKeyList[selectedKeyList]} />
 
-      <div
-        className='   '
-      >
+      <div className='bodyPartListMenu '>
+
         {/* BodyPartListMenu */}
 
-        {selectedKey == 'bodyPart' && <ShowListMenu data={bodyPartListData} />}
+
+
+        {selectedKeyList == 'bodyPart' &&
+        
+        <ShowListMenu list={listData} selectedKeyList={selectedKeyList}   />
+        
+      
+        
+        }
       </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </>
   );
 }

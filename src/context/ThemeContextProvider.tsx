@@ -71,7 +71,7 @@ function ThemeContextProvider({ children }: ThemeContextProviderPropsType) {
         className={
           'dark:text-gray-200 dark:bg-gray-900 min-h-screen mx-auto max-w-6xl select-none transition-colors duration-300 text-gray-900  bg-gray-300}' //bg-gray-300 it d'snt work
         }
-        
+
         // className={`${darkStyle} min-h-screen select-none transition-colors duration-300 ${lightStyle}`}
 
         // className='text-amber-500 bg-gray-900'
@@ -91,25 +91,4 @@ export function useThemeContext() {
     throw new Error('useTheme must be within a ThemeContextProvider');
   }
   return { theme, changeTheme };
-}
-
-export function useTitleApp(){
-const appNames = [
-  'TargetfiT',
-  'muscleTune',
-  'CoreFitment',
-  'MuscleScope',
-  'TargetFlexion',
-  'fitAlign',
-  'FitMuscleXercise',
-  'TargetfleX',
-  'TargetFleXrcise',
-  'muscleXercise',
-  'TargetXercise',
-];
-const appName = appNames[Math.floor(Math.random() * (appNames.length - 1))];
-
-const [titleApp, setTitleApp] = useState(appName);
-
-return {titleApp, setTitleApp};
 }
