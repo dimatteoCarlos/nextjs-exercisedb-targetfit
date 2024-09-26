@@ -1,10 +1,31 @@
 'use client';
-import React, { useEffect } from 'react';
 
+import ShowBannerImgSelected, {
+  SelectedKeyListType,
+  BannerSelectionPropType,
+} from './ShowBannerImgSelected';
+import { getSelectedBannerGroup } from '@/utils/getSelectedBannerGroup';
+import { bannerOptionsName } from '@/utils/bannersDefinition';
+type HeroBannerPropsType = { selectedKeyList: SelectedKeyListType };
 
-type HeroBannerPropsType = { bannerImage: string };
+const HeroBanner = ({ selectedKeyList }: HeroBannerPropsType) => {
+  // Get selected banner group using the reusable function
 
-const HeroBanner = ({ bannerImage }: HeroBannerPropsType) => {
+  // const bannerOptionsName = {
+  //   bannersKeyList: 'bannersKeyList',
+  //   womenBannersKeyList: 'womenBannersKeyList',
+  //   menBannersKeyList: 'menBannersKeyList',
+  //   bannersKeyExercises: 'bannersKeyExercises',
+  //   otherBannersKeyList: 'otherBannersKeyList',
+  // };
+
+  const localStorageKey = 'mainBanner';
+
+  const selectedBannerGroup = getSelectedBannerGroup({
+    localStorageKey,
+    bannerOptionsName,
+  });
+
   return (
     <>
       <div
@@ -87,14 +108,22 @@ const HeroBanner = ({ bannerImage }: HeroBannerPropsType) => {
           max-md:min-w-full 
         '
         >
-          <img
+          <ShowBannerImgSelected
+            selectedKeyList={selectedKeyList}
+            // selectedBannerGroup={selectedBannerGroup}
+            selectedBannerGroup={
+              selectedBannerGroup as BannerSelectionPropType['selectedBannerGroup']
+            }
+          />
+
+          {/* <img
             src={`${bannerImage}`}
             alt='hero-banner'
             className='object-cover 
             h-full w-full max-w-full
              md:rounded-bl-[12%]        
             '
-          />
+          /> */}
         </div>
       </div>
     </>

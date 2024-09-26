@@ -1,17 +1,18 @@
 'use server';
 import HeroBanner from '@/components/HeroBanner';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
-import { bodyPartList, targetList, equipmentList } from './_data/dataList';
 
+import ShowListMenu from '@/components/ShowListMenu';
+import ExerciseContextProvider from '@/context/ExercisesContextProvider';
+
+//----------backup data ------------
+import { bodyPartList, targetList, equipmentList } from './_data/dataList';
 import {
   bodyPartListImg,
   targetListImg,
   equipmentListImg,
 } from './_data/imageList';
-
 import exercisesBackup from './_data/exercises/exercises10.json';
-
-import ShowListMenu from '@/components/ShowListMenu';
 
 //---------------------
 export type ListItemType = {
@@ -22,19 +23,13 @@ export type ListItemType = {
 export type ListImgType = {
   [key: string]: { img: string };
 };
-// export type ListImgType = {
-//   [key: string]: { name: string; img: string } | {}[];
-// };
 
-export type ExerciseDataType = {
-  id: string;
-  bodyPart: string;
-  equipment: string;
-  gifUrl: string;
-  name: string;
-  target: string;
-  secondaryMuscles: string[];
-  instructions: string[];
+export type ListImgBackupType = {
+  bodyPart: ListImgType;
+  targetMuscle: ListImgType;
+  equipment: ListImgType;
+  // explore: ListImgType;
+  // start: ListImgType;
 };
 
 export type SearchParamsType = {
@@ -44,31 +39,22 @@ export type SearchParamsType = {
   };
 };
 
-//-------------------------------c
-const menBannersKeyList = {
-  bodyPart: '/images/banners/bannerManBodyParts.png',
-  equipment: '/images/banners/bannerMenEquipment.png',
-  targetMuscle: '/images/banners/bannerExplore.png',
-  explore: '/images/banners/bannerMenTargetMuscle.png',
-  start: '/images/banners/bannerMenTargetMuscle.png',
-};
-const womenBannersKeyList = {
-  bodyPart: '/images/banners/bannerWomenBodyParts.png',
-  equipment: '/images/banners/bannerWomenEquipment.png',
-  explore: '/images/banners/bannerExplorer.png',
-  targetMuscle: '/images/banners/bannerWomenTargetMuscle.png',
-  start: 'bannerWomanBodyParts.png',
+//--------------------
+
+const listDataBackup = {
+  bodyPart: bodyPartList,
+  equipment: equipmentList,
+  targetMuscle: targetList,
+  // explore: {},
+  // start: {},
 };
 
-const BannersKeyList = {
-  // bodyPart: '/images/banners/bannerMenBodyPart.png',
-  // bodyPart: '/images/banners/bannerWomanAndManBodyParts.png',
-  // bodyPart: '/images/banners/bannerHumanBodyParts_2.png',
-  bodyPart: '/images/banners/bannerMenTargetMuscle.png',
-  equipment: '/images/banners/bannerWomenBodyParts.png',
-  explore: '/images/banners/bannerWomenBodyParts.png',
-  targetMuscle: '/images/banners/bannerWomenTargetMuscle.png',
-  start: '/images/banners/bannerWomanAndManBodyParts.png',
+const listImgBackup = {
+  bodyPart: bodyPartListImg,
+  equipment: equipmentListImg,
+  targetMuscle: targetListImg,
+  // explore: {},
+  // start: {},
 };
 //----------------------
 const endpointLists = {
@@ -79,35 +65,13 @@ const endpointLists = {
   //   Math.random() * (1324 - 20)
   // )}`,
   // start: '',
-};
-
-const listDataBackup = {
-  bodyPart: bodyPartList,
-  equipment: equipmentList,
-  targetMuscle: targetList,
-  // explore: {},
-  // start: {},
-};
-
-export type ListImgBackupType = {
-  bodyPart: ListImgType;
-  targetMuscle: ListImgType;
-  equipment: ListImgType;
-  // explore: ListImgType;
-  // start: ListImgType;
-};
-const listImgBackup = {
-  bodyPart: bodyPartListImg,
-  equipment: equipmentListImg,
-  targetMuscle: targetListImg,
-  // explore: {},
-  // start: {},
+  //search
 };
 
 //--------------------c
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
-  const selectedKeyList = genre in BannersKeyList ? genre : 'bodyPart';
+  const selectedKeyList = genre ? genre : 'bodyPart';
 
   //Request of listData from api
 
@@ -117,9 +81,9 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   console.log('List:', list);
 
-  //So far there'are only figures for body part list
+  //So far there'are only figures for body part list and target list
 
-  //---bodyParts--------/
+  //---build menu list with images from local files--------/
 
   function constructListMenu(listName: string[], listImg: ListImgType) {
     const listOfItems: ListItemType[] = Array.from(listName, (item: string) => {
@@ -136,7 +100,6 @@ export default async function Home({ searchParams }: SearchParamsType) {
     return listOfItems;
   }
   //-----------------
-
   const listData =
     selectedKeyList in listImgBackup && Array.isArray(list)
       ? constructListMenu(list, listImgBackup[selectedKeyList])
@@ -146,18 +109,18 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   console.log({ listData });
 
+  //-------------------------------------
   //render
+
   return (
     <>
-      <HeroBanner bannerImage={BannersKeyList[selectedKeyList]} />
+      <HeroBanner selectedKeyList={selectedKeyList} />
 
       <div className='listMenu '>
         {/* ListMenu */}
-
-        <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
-
-        {/* {selectedKeyList == 'bodyPart' && (
-        )} */}
+        <ExerciseContextProvider>
+          <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
+        </ExerciseContextProvider>
       </div>
     </>
   );

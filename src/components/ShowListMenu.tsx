@@ -7,9 +7,11 @@ import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
 // import { backExercises } from '../app/_data/bodyParts/exercises/backExercises';
 import exercisesBodyPartDataBackup from '../app/_data/bodyParts/exercises/backExercises.json';
-import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
 import exercisesEquipmentDataBackup from '../app/_data/equipment/EquipmentExercisesData.json';
 import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_target.json';
+import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
+import { useExerciseData } from '@/context/ExercisesContextProvider';
+import { useRouter } from 'next/navigation';
 
 export type ExerciseDataType = {
   id: string;
@@ -51,43 +53,59 @@ const exercisesDataBackupKey = {
   // explore: exerciseExploreDataBackup,
 };
 
-console.log({ exercisesDataBackupKey });
+// console.log({ exercisesDataBackupKey });
 //----------------------------------------
 function ShowListMenu({
   list,
   selectedKeyList,
 }: ShowListMenuPropType): React.JSX.Element {
   const [selectedListItem, setSelectedListItem] = useState<string | null>(null);
-  // const [ExerciseData, setExerciseData] = useState(null);
-
+  const { setExerciseData } = useExerciseData();
+  const router = useRouter();
+  //-------------------
   const handleSelectedItem = async (name: string) => {
     console.log(name);
     if (list.some((item) => item.name === name)) {
       setSelectedListItem(name);
+
       //------endpoint construction-------------
-      const urlQuery = `?limit=12&offset=${Math.floor(Math.random() * 13)}`;
+      const urlQuery = ``;
+      // const urlQuery = `?limit=15&offset=${Math.floor(Math.random() * 16)}`;
 
       //placeholder for explore and start
       // selectedKeyList == 'explore'
       //   ? ''
       //   : `?limit=10&offset=${Math.floor(Math.random() * 11)}}`;
 
-      const url = `${BASEURL_EXERCISEDB}${endpointExercises[selectedKeyList]}${selectedListItem}${urlQuery}`;
+      const url = `${BASEURL_EXERCISEDB}${endpointExercises[selectedKeyList]}${name}${urlQuery}`;
 
       const backupExercisesData = exercisesDataBackupKey[selectedKeyList].slice(
         0,
         15
       );
 
+      console.log({ selectedListItem }, { urlQuery });
+
+      console.log({ BASEURL_EXERCISEDB }, endpointExercises[selectedKeyList]);
+
+      console.log(url);
+
       const exercisesData = await fetchData<ExerciseDataType>(
         url,
         backupExercisesData
       );
 
-      console.log('ExercisesData:', exercisesData);
+      console.log(
+        'ExercisesData:',
+        exercisesData,
+        'exercises found:',
+        exercisesData.length
+      );
+
+      setExerciseData(exercisesData);
+
+      // router.push(`/show-exercises/?genre=${selectedKeyList}`);
     }
-    //hacer el fetcha para obtener la data
-    //setExerciseData(data)
   };
 
   return (
@@ -137,6 +155,7 @@ function ShowListMenu({
           );
         })}
       </div>
+
       {/* </div> */}
     </>
   );
