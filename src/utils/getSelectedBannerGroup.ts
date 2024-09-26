@@ -1,5 +1,5 @@
 type GetSelectedBannerGroupType = {
-  localStorageKey?: string;
+  localStorageKey: string;
   bannerOptionsName: {
     [key: string]: string;
   };
@@ -11,7 +11,7 @@ export function getSelectedBannerGroup({
 }: GetSelectedBannerGroupType): string {
   const bannerValuesArray = Object.values(bannerOptionsName);
 
-  console.log({ localStorageKey });
+console.log({ localStorageKey });
 
   if (bannerValuesArray.length === 0) {
     throw new Error('No banner options available');
@@ -24,7 +24,7 @@ export function getSelectedBannerGroup({
     bannerStored &&
     bannerStored != null &&
     bannerValuesArray.includes(JSON.parse(bannerStored)) &&
-    bannerStored !== ''
+    bannerStored.trim() !== ''
       ? JSON.parse(bannerStored)
       : bannerValuesArray[Math.floor(Math.random() * bannerValuesArray.length)];
 

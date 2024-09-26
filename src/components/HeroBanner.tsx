@@ -6,25 +6,37 @@ import ShowBannerImgSelected, {
 } from './ShowBannerImgSelected';
 import { getSelectedBannerGroup } from '@/utils/getSelectedBannerGroup';
 import { bannerOptionsName } from '@/utils/bannersDefinition';
+import { useEffect, useState } from 'react';
+import Loading from '@/app/loading';
+
 type HeroBannerPropsType = { selectedKeyList: SelectedKeyListType };
 
 const HeroBanner = ({ selectedKeyList }: HeroBannerPropsType) => {
-  // Get selected banner group using the reusable function
-
-  // const bannerOptionsName = {
-  //   bannersKeyList: 'bannersKeyList',
-  //   womenBannersKeyList: 'womenBannersKeyList',
-  //   menBannersKeyList: 'menBannersKeyList',
-  //   bannersKeyExercises: 'bannersKeyExercises',
-  //   otherBannersKeyList: 'otherBannersKeyList',
-  // };
-
   const localStorageKey = 'mainBanner';
 
-  const selectedBannerGroup = getSelectedBannerGroup({
-    localStorageKey,
-    bannerOptionsName,
-  });
+  const [selectedBannerGroup, setSelectedBannerGroup] = useState<
+    null | string | BannerSelectionPropType['selectedBannerGroup']
+  >(null);
+
+  useEffect(() => {
+    const chosenBannerGroup = getSelectedBannerGroup({
+      localStorageKey,
+      bannerOptionsName,
+    });
+    console.log('useEffect:', chosenBannerGroup);
+    setSelectedBannerGroup(chosenBannerGroup);
+  }, []);
+
+  console.log('🚀 ~ HeroBanner ~ selectedBannerGroup:', selectedBannerGroup);
+
+  if (selectedBannerGroup === null) {
+    return (
+      <>
+        <Loading />{' '}
+      </>
+    );
+  }
+  //--------------------
 
   return (
     <>

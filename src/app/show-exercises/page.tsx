@@ -1,20 +1,86 @@
-import React from 'react';
+'use client';
 // import { useSearchParams } from 'next/navigation';
 import { SearchParamsType } from '@/app/page';
+import { useExerciseData } from '@/context/ExercisesContextProvider';
+import { ExerciseDataType } from '@/components/ShowListMenu';
+import Card from '@/components/Card';
+import { GenreType } from '@/app/page';
 
-function ShowExercises({ searchParams }: SearchParamsType) {
-  // const genre = useSearchParams().get('genre');
-  const genreAlt = searchParams?.genre;
-  // const selectedKeyList = genre in bannersKeyList ? genre : 'bodyPart';
+type ShowExercisesPropType = {
+  searchParams: {
+    genre: SearchParamsType['searchParams']['genre'];
+    name: string;
+  };
+};
 
-  //context desde useHook, searchParams genre para extraerlo del query / con el query, puedo seleccion el banner, y mostrar el banner, con context tengo los datos despues vendra una validacion: del query y msj de error, y de los datos msj de error.  con los datos, mostrar cuantos son, y luego, hacer un slice de 20, y utilizando un comp card renderizarlos.
-  //asegurar los tipos ts de: exercises, bannerPickUpList, selectedKeyList, no se donde estan definidos los tipo anteriores para importarlos.  En las card, se debe poder capturar el id con un click, para luego poder hacer la busqueda de ese ejercicio en especifico y  mostrar los detalles del exerices selected. El ejercicio seleccionado como detail:
-  //como esta en la app de referencia, y montar la busqueda de los videos relacionados con este ejercicio.
+function ShowExercises({ searchParams }: ShowExercisesPropType) {
+  const genre = searchParams?.genre;
+  const name = searchParams?.name;
+  const { exerciseData } = useExerciseData();
+  const numberOfExercisesFound = exerciseData.length;
+  console.log(
+    '🚀 ~ ShowExercises ~ numberOfExercisesFound:',
+    numberOfExercisesFound
+  );
 
-  // despues habria que manejar el Explore, y el search.
-  // tal vez el search hacerlo tipo filtro
+  const filteredDataExercises =
+    exerciseData?.filter(
+      (exercise: ExerciseDataType) => exercise?.gifUrl !== undefined
+    ) || []; //should get the backup exercises
 
-  return <></>;
+  const numberOfExercisesWithImg = filteredDataExercises.length;
+  console.log(
+    '🚀 ~ ShowExercises ~ numberOfExercisesWithImg:',
+    numberOfExercisesWithImg
+  );
+
+  const exercisesToRender = filteredDataExercises.slice(0, 20);
+  console.log('🚀 ~ ShowExercises ~ exercisesToRender:', exercisesToRender);
+
+
+  const convertGenreToTitleGenre = (genre: GenreType) => {
+    if (genre === 'bodyPart') {
+      return 'Body Part';
+    } else if (genre === 'targetMuscle') {
+      return 'Target Muscle';
+    } else if (genre === 'equipment') {
+      return 'Equipment';
+    } else {
+      return null;
+    }
+  };
+  const titleGenre = convertGenreToTitleGenre(genre);
+
+  return (
+    <section className='exercises dark:text-gray-200 dark:bg-gray-800 min-h-lvh'>
+      <div className='exercisesTitle '>
+        <p className=' text-[1.25rem] text-center font-bold items-center p-3 capitalize'>
+          {`${titleGenre} : `}{' '}
+          <span className='text-amber-600 font-semibold'> {name}</span>
+        </p>
+        <p className='text-center mx-auto font-normal text-[1rem] '>
+          {numberOfExercisesFound} exercises found
+        </p>
+      </div>
+
+      <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-6xl mx-auto py-4'>
+        {!exercisesToRender ||
+          (exercisesToRender.length === 0 && 'No Data found')}
+
+        {!!exercisesToRender &&
+          exercisesToRender.length > 0 &&
+          exercisesToRender?.map((exercise, ind) => (
+            <Card
+              key={exercise.id}
+              genre={genre}
+              selectedName={name}
+              exercise={exercise}
+              cardOrder={ind + 1}
+            />
+          ))}
+      </div>
+    </section>
+  );
 }
 
 export default ShowExercises;

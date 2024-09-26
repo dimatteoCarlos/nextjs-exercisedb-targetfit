@@ -14,26 +14,25 @@ export const exerciseOptions = {
 };
 
 //---------------
-export const youtubeOptions = {
-  method: 'GET',
-  headers: {
-    'x-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com',
-    'x-RapidAPI-Key': 'API_KEY_EXERCISE as string',
-    // 'x-RapidAPI-Key': API_KEY_EXERCISE as string,
-  },
-};
+// export const youtubeOptions = {
+// method: 'GET',
+// headers: {
+//   'x-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com',
+//   'x-RapidAPI-Key': 'API_KEY_EXERCISE as string',
+// 'x-RapidAPI-Key': API_KEY_EXERCISE as string,
+// },
+// };
 //-------------------
 
-export async function fetchData<D>(
-  url: string,
-  backupData: D[]
-): Promise<D[] | []> {
+export async function fetchData<D>(url: string, backupData: D[]): Promise<D[]> {
+  //Promise<D[] | []>
   try {
     console.log(API_KEY_EXERCISE);
     console.log({ url });
+
     const res: Response = await fetch(url, exerciseOptions);
     // const data = await res.json();
-    const data = res.ok ? await res.json() : backupData ?? [];
+    const data = res.ok ? await res.json() : backupData; //?? [];
 
     if (!res.ok && data) {
       console.log('Failed to fetch data so backup data is shown');
@@ -47,7 +46,7 @@ export async function fetchData<D>(
     return data;
   } catch (error: unknown) {
     console.error('Fetch error:', error);
-    return backupData ?? [];
+    return backupData; //?? [];
   }
 }
 

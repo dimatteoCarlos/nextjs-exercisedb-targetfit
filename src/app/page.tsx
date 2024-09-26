@@ -1,17 +1,17 @@
 'use server';
-import HeroBanner from '@/components/HeroBanner';
+// import ExerciseContextProvider from '@/context/ExercisesContextProvider';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
+import HeroBanner from '@/components/HeroBanner';
 import ShowListMenu from '@/components/ShowListMenu';
-import ExerciseContextProvider from '@/context/ExercisesContextProvider';
 
 //----------backup data ------------
-import { bodyPartList, targetList, equipmentList } from './_data/dataList';
+import { bodyPartList, targetList, equipmentList } from './_data/dataList'; //list names by genre
 import {
   bodyPartListImg,
   targetListImg,
   equipmentListImg,
-} from './_data/imageList';
+} from './_data/imageList'; //list of img addresses by genre
 import exercisesBackup from './_data/exercises/exercises10.json';
 
 //---------------------
@@ -39,6 +39,8 @@ export type SearchParamsType = {
   };
 };
 
+export type GenreType = SearchParamsType['searchParams']['genre'];
+
 //--------------------
 
 const listDataBackup = {
@@ -57,7 +59,7 @@ const listImgBackup = {
   // start: {},
 };
 //----------------------
-const endpointLists = {
+const endpointList = {
   bodyPart: '/exercises/bodyPartList',
   equipment: '/exercises/equipmentList',
   targetMuscle: '/exercises/targetList',
@@ -71,17 +73,19 @@ const endpointLists = {
 //--------------------c
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
-  const selectedKeyList = genre ? genre : 'bodyPart';
+  const selectedKeyList = genre ? genre : 'bodyPart'; //start
+
+  //---build url----
+  const url = `${BASEURL_EXERCISEDB}${endpointList[selectedKeyList]}`;
+  const backupDataList = listDataBackup[selectedKeyList];
 
   //Request of listData from api
 
-  const url = `${BASEURL_EXERCISEDB}${endpointLists[selectedKeyList]}`;
-  const backupDataList = listDataBackup[selectedKeyList];
   const list = await fetchData<string>(url, backupDataList);
 
   console.log('List:', list);
 
-  //So far there'are only figures for body part list and target list
+  //So far there'are only figures for body part  and target lists
 
   //---build menu list with images from local files--------/
 
@@ -116,12 +120,10 @@ export default async function Home({ searchParams }: SearchParamsType) {
     <>
       <HeroBanner selectedKeyList={selectedKeyList} />
 
-      <div className='listMenu '>
-        {/* ListMenu */}
-        <ExerciseContextProvider>
-          <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
-        </ExerciseContextProvider>
-      </div>
+      {/* <div className='listMenu '> */}
+      {/* ListMenu */}
+      <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
+      {/* </div> */}
     </>
   );
 }

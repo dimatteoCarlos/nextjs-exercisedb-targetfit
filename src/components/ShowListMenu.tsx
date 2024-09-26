@@ -1,17 +1,18 @@
 'use client';
-import React, { useState } from 'react';
 import RightArrowIcon from '../../public/assets/icons/right-arrow.png';
 import LeftArrowIcon from '../../public/assets/icons/left-arrow.png';
 import { ListItemType, SearchParamsType } from '@/app/page';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
-// import { backExercises } from '../app/_data/bodyParts/exercises/backExercises';
+//backup data for exercises
 import exercisesBodyPartDataBackup from '../app/_data/bodyParts/exercises/backExercises.json';
 import exercisesEquipmentDataBackup from '../app/_data/equipment/EquipmentExercisesData.json';
 import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_target.json';
 import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
-import { useExerciseData } from '@/context/ExercisesContextProvider';
+
 import { useRouter } from 'next/navigation';
+import { useExerciseData } from '@/context/ExercisesContextProvider';
+import { useState } from 'react';
 
 export type ExerciseDataType = {
   id: string;
@@ -62,14 +63,21 @@ function ShowListMenu({
   const [selectedListItem, setSelectedListItem] = useState<string | null>(null);
   const { setExerciseData } = useExerciseData();
   const router = useRouter();
-  //-------------------
+
+  //-----get name from item list menu to fetch exercises------
   const handleSelectedItem = async (name: string) => {
-    console.log(name);
-    if (list.some((item) => item.name === name)) {
+    // console.log({ name }, list);
+
+    if (list.some((item) => item.name == name)) {
       setSelectedListItem(name);
+      console.log(
+        list.some((item) => item.name == name),
+        { selectedListItem }
+      );
 
       //------endpoint construction-------------
       const urlQuery = ``;
+
       // const urlQuery = `?limit=15&offset=${Math.floor(Math.random() * 16)}`;
 
       //placeholder for explore and start
@@ -79,16 +87,15 @@ function ShowListMenu({
 
       const url = `${BASEURL_EXERCISEDB}${endpointExercises[selectedKeyList]}${name}${urlQuery}`;
 
-      const backupExercisesData = exercisesDataBackupKey[selectedKeyList].slice(
-        0,
-        15
-      );
+      const backupExercisesData = exercisesDataBackupKey[selectedKeyList];
 
       console.log({ selectedListItem }, { urlQuery });
 
       console.log({ BASEURL_EXERCISEDB }, endpointExercises[selectedKeyList]);
 
-      console.log(url);
+      console.log({ url });
+
+      //----request to api------------------------------
 
       const exercisesData = await fetchData<ExerciseDataType>(
         url,
@@ -104,20 +111,22 @@ function ShowListMenu({
 
       setExerciseData(exercisesData);
 
-      // router.push(`/show-exercises/?genre=${selectedKeyList}`);
+      router.push(`/show-exercises/?genre=${selectedKeyList}&name=${name}`);
     }
   };
+
+  //========================
 
   return (
     <>
       {/* Horizonal List Menu */}
       <div
-        className={`${
+        className={`listMenu ${
           list.length > 12 ? '' : 'scroll-menu-wrapper'
         } text-[0.9rem] lg:text-[1.0rem] md:text-[0.89rem]
            font-semibold text-[#3A1212] capitalize 
           grid gap-5  grid-cols-2 lg:grid-cols-6  md:grid-cols-4 sm:grid-cols-3
-          py-8 w-full overflow-x-auto
+          py-8 px-3 w-full overflow-x-auto
           dark:bg-gray-800 dark:text-gray-300 `}
       >
         {list.map((item, indx) => {
@@ -130,7 +139,7 @@ function ShowListMenu({
             flex flex-col justify-center items-center  gap-3 
             cursor-pointer text-center 
             group sm:hover:shadow-slate-400 sm:shadow-md 
-            transition-shadow duration-200 p-3
+            transition-shadow duration-200 p-3 
 
              ${
                selectedListItem === item.name
@@ -141,7 +150,6 @@ function ShowListMenu({
               key={indx}
               id={item.name}
               onClick={() => handleSelectedItem(item.name)}
-              // style={{ boxShadow: selectedListItem === item.name ? 'overline' : 'none' }}
             >
               {item.name}
 

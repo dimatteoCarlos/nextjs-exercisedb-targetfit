@@ -51,7 +51,7 @@ export const bannersKeyExercises: BannerKeyListType = {
   equipment: '/images/banners/bannerEquipment3.png',
   explore: '/images/banners/bannerExplorer.png',
   targetMuscle: '/images/banners/bannerMenTargetMuscle.png',
-  // start: '/images/banners/bannerMenEquipment.png',
+  start: '/images/banners/bannerWomanAndManBodyParts.png',
 };
 
 export const otherBannersKeyList: BannerKeyListType = {
@@ -60,12 +60,5 @@ export const otherBannersKeyList: BannerKeyListType = {
   targetMuscle: '/images/banners/bannerMenBodyParts.png',
   explore: '/images/banners/bannerExplorer.png',
 };
-
-// export const otherBannersKeyList: BannerKeyListType = {
-//   bodyPart: '/images/banners/bannerWomanAndManBodyParts.png',
-//   equipment: '/images/banners/bannerWomenEquipment.png',
-//   targetMuscle: '/images/banners/bannerMenBodyParts.png',
-//   explore: '/images/banners/bannerExplorer.png',
-// };
 
 //---------------------------------------
