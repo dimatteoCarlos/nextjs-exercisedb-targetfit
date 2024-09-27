@@ -35,7 +35,7 @@ export default function RootLayout({
           <ExerciseContextProvider>
             <Header titleApp={titleApp} />
             <Navbar />
-            <SearchBox />
+            {/* <SearchBox /> */}
             {children}
           </ExerciseContextProvider>
         </ThemeContextProvider>

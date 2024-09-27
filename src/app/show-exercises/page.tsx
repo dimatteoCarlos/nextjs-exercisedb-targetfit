@@ -34,23 +34,26 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
     numberOfExercisesWithImg
   );
 
-  const exercisesToRender = filteredDataExercises.slice(0, 20);
+  const exercisesToRender = filteredDataExercises.slice(0, 1325);
   console.log('🚀 ~ ShowExercises ~ exercisesToRender:', exercisesToRender);
 
+  //const genreTitlesKey:Record<GenreType, string>
+  const genreTitlesKey: { [key in GenreType]: string } = {
+    bodyPart: 'Body Part',
+    targetMuscle: 'Target Muscle',
+    equipment: 'Equipment',
+  };
 
-  const convertGenreToTitleGenre = (genre: GenreType) => {
-    if (genre === 'bodyPart') {
-      return 'Body Part';
-    } else if (genre === 'targetMuscle') {
-      return 'Target Muscle';
-    } else if (genre === 'equipment') {
-      return 'Equipment';
+  const convertGenreToTitleGenre = (genre: GenreType): string | null => {
+    if (genre in genreTitlesKey) {
+      return genreTitlesKey[genre];
     } else {
       return null;
     }
   };
-  const titleGenre = convertGenreToTitleGenre(genre);
 
+  const titleGenre = convertGenreToTitleGenre(genre);
+  //--------------------------------------
   return (
     <section className='exercises dark:text-gray-200 dark:bg-gray-800 min-h-lvh'>
       <div className='exercisesTitle '>
@@ -63,7 +66,7 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
         </p>
       </div>
 
-      <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-w-6xl mx-auto py-4'>
+      <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 max-w-6xl mx-auto py-4'>
         {!exercisesToRender ||
           (exercisesToRender.length === 0 && 'No Data found')}
 

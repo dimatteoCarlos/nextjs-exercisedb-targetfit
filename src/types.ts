@@ -57,4 +57,42 @@ type ExerciseDataContextType = {
   setExerciseData: (exerciseData: ExerciseDataType[]) => void;
 };
 
-//----------------------
+//----ShowBannerImgSelected.tsx----------------
+
+export type SelectedKeyListType = SearchParamsType['searchParams']['genre'];
+
+export type BannerSelectionPropType = {
+  selectedKeyList: SelectedKeyListType;
+  selectedBannerGroup:
+    | 'menBannersKeyList'
+    | 'womenBannersKeyList'
+    | 'bannersKeyList'
+    | 'bannersKeyExercises'
+    | 'otherBannersKeyList';
+};
+
+export type BannerOptionsType = {
+  [key: string]: BannerKeyListType;
+};
+//---HeroBanner.tsx------------------------
+type HeroBannerPropsType = { selectedKeyList: SelectedKeyListType };
+
+//----------Card.tsx-----------------------------
+
+export type CardPropsType = {
+  exercise: ExerciseDataType;
+  genre: GenreType;
+  selectedName: string;
+  cardOrder: number;
+};
+//------BannersDefinition.tsx----------
+export type BannerKeyListType = {
+  bodyPart: string;
+  equipment: string;
+  targetMuscle: string;
+  explore?: string;
+  start?: string;
+};
+//---------------------------------------
+
+//---------------------------------------

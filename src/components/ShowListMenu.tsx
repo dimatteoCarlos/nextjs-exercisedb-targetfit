@@ -1,6 +1,6 @@
 'use client';
-import RightArrowIcon from '../../public/assets/icons/right-arrow.png';
-import LeftArrowIcon from '../../public/assets/icons/left-arrow.png';
+// import RightArrowIcon from '../../public/assets/icons/right-arrow.png';
+// import LeftArrowIcon from '../../public/assets/icons/left-arrow.png';
 import { ListItemType, SearchParamsType } from '@/app/page';
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
@@ -76,9 +76,10 @@ function ShowListMenu({
       );
 
       //------endpoint construction-------------
-      const urlQuery = ``;
-
-      // const urlQuery = `?limit=15&offset=${Math.floor(Math.random() * 16)}`;
+      const urlQuery = `?limit=1325&offset=0`;
+      
+      // const urlQuery = ``;
+      // const urlQuery = `?limit=1325&offset=${Math.floor(Math.random() * 16)}`;
 
       //placeholder for explore and start
       // selectedKeyList == 'explore'
@@ -95,19 +96,19 @@ function ShowListMenu({
 
       console.log({ url });
 
-      //----request to api------------------------------
+      //----request to api--------------
 
       const exercisesData = await fetchData<ExerciseDataType>(
         url,
         backupExercisesData
       );
 
-      console.log(
-        'ExercisesData:',
-        exercisesData,
-        'exercises found:',
-        exercisesData.length
-      );
+      // console.log(
+      //   'ExercisesData:',
+      //   exercisesData,
+      //   'exercises found:',
+      //   exercisesData.length
+      // );
 
       setExerciseData(exercisesData);
 
@@ -119,7 +120,7 @@ function ShowListMenu({
 
   return (
     <>
-      {/* Horizonal List Menu */}
+      {/* List Menu */}
       <div
         className={`listMenu ${
           list.length > 12 ? '' : 'scroll-menu-wrapper'

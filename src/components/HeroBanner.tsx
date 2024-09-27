@@ -27,7 +27,7 @@ const HeroBanner = ({ selectedKeyList }: HeroBannerPropsType) => {
     setSelectedBannerGroup(chosenBannerGroup);
   }, []);
 
-  console.log('🚀 ~ HeroBanner ~ selectedBannerGroup:', selectedBannerGroup);
+  // console.log('🚀 ~ HeroBanner ~ selectedBannerGroup:', selectedBannerGroup);
 
   if (selectedBannerGroup === null) {
     return (
@@ -127,15 +127,6 @@ const HeroBanner = ({ selectedKeyList }: HeroBannerPropsType) => {
               selectedBannerGroup as BannerSelectionPropType['selectedBannerGroup']
             }
           />
-
-          {/* <img
-            src={`${bannerImage}`}
-            alt='hero-banner'
-            className='object-cover 
-            h-full w-full max-w-full
-             md:rounded-bl-[12%]        
-            '
-          /> */}
         </div>
       </div>
     </>

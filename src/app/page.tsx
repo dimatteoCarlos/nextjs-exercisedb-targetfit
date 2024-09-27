@@ -1,5 +1,5 @@
 'use server';
-// import ExerciseContextProvider from '@/context/ExercisesContextProvider';
+
 import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
 import HeroBanner from '@/components/HeroBanner';
@@ -85,9 +85,9 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   console.log('List:', list);
 
-  //So far there'are only figures for body part  and target lists
+  //So far there'are only local figure images for body part and target lists
 
-  //---build menu list with images from local files--------/
+  //---build menu list with images from local files----/
 
   function constructListMenu(listName: string[], listImg: ListImgType) {
     const listOfItems: ListItemType[] = Array.from(listName, (item: string) => {
@@ -97,9 +97,9 @@ export default async function Home({ searchParams }: SearchParamsType) {
           listImg[item.split(' ').join('_')].img ?? '/images/notFoundImg.png',
       };
 
-      console.log({ obj });
       return { ...obj };
     });
+
     console.log('listOfItems:', listOfItems);
     return listOfItems;
   }
@@ -108,10 +108,6 @@ export default async function Home({ searchParams }: SearchParamsType) {
     selectedKeyList in listImgBackup && Array.isArray(list)
       ? constructListMenu(list, listImgBackup[selectedKeyList])
       : [];
-
-  console.log({ selectedKeyList });
-
-  console.log({ listData });
 
   //-------------------------------------
   //render

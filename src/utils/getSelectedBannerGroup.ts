@@ -11,7 +11,7 @@ export function getSelectedBannerGroup({
 }: GetSelectedBannerGroupType): string {
   const bannerValuesArray = Object.values(bannerOptionsName);
 
-console.log({ localStorageKey });
+  // console.log({ localStorageKey });
 
   if (bannerValuesArray.length === 0) {
     throw new Error('No banner options available');

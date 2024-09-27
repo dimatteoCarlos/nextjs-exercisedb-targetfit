@@ -2,7 +2,7 @@ import React from 'react';
 
 export const BASEURL_EXERCISEDB = 'https://exercisedb.p.rapidapi.com';
 
-const API_KEY_EXERCISE = process.env.NEXT_PUBLIC_API_KEY_EXERCISExx;
+const API_KEY_EXERCISE = process.env.NEXT_PUBLIC_API_KEY_EXERCISE;
 const apiHost_exercisedb = 'exercisedb.p.rapidapi.com';
 
 export const exerciseOptions = {
@@ -27,7 +27,6 @@ export const exerciseOptions = {
 export async function fetchData<D>(url: string, backupData: D[]): Promise<D[]> {
   //Promise<D[] | []>
   try {
-    console.log(API_KEY_EXERCISE);
     console.log({ url });
 
     const res: Response = await fetch(url, exerciseOptions);

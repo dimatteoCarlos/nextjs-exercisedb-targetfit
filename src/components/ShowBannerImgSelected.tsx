@@ -10,17 +10,7 @@ import {
 
 import { SearchParamsType } from '@/app/page';
 
-// export type BannerKeyListType = {
-//   bodyPart: string;
-//   equipment: string;
-//   targetMuscle: string;
-//   explore?: string;
-//   start?: string;
-// };
-
 export type SelectedKeyListType = SearchParamsType['searchParams']['genre'];
-// 'bodyPart' | 'equipment' | 'targetMuscle';
-//  | 'explore' | 'start';
 
 export type BannerSelectionPropType = {
   selectedKeyList: SelectedKeyListType;
@@ -53,17 +43,17 @@ function ShowBannerImgSelected({
   selectedBannerGroup,
 }: BannerSelectionPropType) {
   //------show banner hero image-------c
-  console.log(
-    'SBIS:',
-    bannerOptions[selectedBannerGroup][selectedKeyList],
-    selectedKeyList,
-    selectedBannerGroup
-  );
+  // console.log(
+  //   'SBIS:',
+  //   bannerOptions[selectedBannerGroup][selectedKeyList],
+  //   selectedKeyList,
+  //   selectedBannerGroup
+  // );
 
   const selectedBannerAddress =
     bannerOptions[selectedBannerGroup][selectedKeyList];
-    
-  console.log({ selectedBannerAddress });
+
+  // console.log({ selectedBannerAddress });
 
   return (
     <>

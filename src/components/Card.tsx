@@ -31,26 +31,12 @@ export default function Card({
 
   const secondaryTargets = secondaryMuscles.join(', ');
 
-  const convertGenreToTitleGenre = (genre: GenreType) => {
-    if (genre === 'bodyPart') {
-      return 'Body Part';
-    } else if (genre === 'targetMuscle') {
-      return 'Target Muscle';
-    } else if (genre === 'equipment') {
-      return 'Equipment';
-    } else {
-      return null;
-    }
-  };
-
-  const titleGenre = convertGenreToTitleGenre(genre);
-
   const detailRoute = `/${genre}/${selectedName}/${id}`;
 
   return (
     // <div className='exercisesCard'>
     <div
-      className='group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg sm:border sm:border-slate-400
+      className='group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg border border-slate-400 m-3
       sm:m-2 transition-shadow duration-200 text-center sm:text-start'
     >
       <Link
