@@ -12,7 +12,7 @@ import {
   targetListImg,
   equipmentListImg,
 } from './_data/imageList'; //list of img addresses by genre
-import exercisesBackup from './_data/exercises/exercises10.json';
+// import exercisesBackup from './_data/exercises/exercises10.json';
 
 //---------------------
 export type ListItemType = {
@@ -85,10 +85,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   console.log('List:', list);
 
-  //So far there'are only local figure images for body part and target lists
-
   //---build menu list with images from local files----/
-
   function constructListMenu(listName: string[], listImg: ListImgType) {
     const listOfItems: ListItemType[] = Array.from(listName, (item: string) => {
       const obj = {
@@ -115,7 +112,6 @@ export default async function Home({ searchParams }: SearchParamsType) {
   return (
     <>
       <HeroBanner selectedKeyList={selectedKeyList} />
-
       {/* <div className='listMenu '> */}
       {/* ListMenu */}
       <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
@@ -123,3 +119,5 @@ export default async function Home({ searchParams }: SearchParamsType) {
     </>
   );
 }
+
+

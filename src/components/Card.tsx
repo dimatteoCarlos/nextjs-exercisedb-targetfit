@@ -20,18 +20,19 @@ export default function Card({
   const {
     id,
     bodyPart,
-    equipment,
     gifUrl,
     name,
     target,
     secondaryMuscles,
+    equipment,
     instructions,
   } = exercise;
   console.log({ gifUrl });
 
   const secondaryTargets = secondaryMuscles.join(', ');
 
-  const detailRoute = `/${genre}/${selectedName}/${id}`;
+  const detailRoute = `detail-exercise/${id}`;
+  // const query = `?/genre=${genre}/selectedName=${selectedName}/id=${id}`;
 
   return (
     // <div className='exercisesCard'>
@@ -40,7 +41,7 @@ export default function Card({
       sm:m-2 transition-shadow duration-200 text-center sm:text-start'
     >
       <Link
-        href={detailRoute}
+        href={{ pathname: detailRoute }}
         className='block p-4 bg-gray-200 text-gray-700
            dark:bg-gray-700
            dark:text-gray-300  shadow-lg rounded-lg hover:shadow-xl transition-shadow border-none h-full w-full

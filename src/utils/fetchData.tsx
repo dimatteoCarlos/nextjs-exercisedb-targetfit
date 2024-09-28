@@ -24,28 +24,39 @@ export const exerciseOptions = {
 // };
 //-------------------
 
-export async function fetchData<D>(url: string, backupData: D[]): Promise<D[]> {
-  //Promise<D[] | []>
+export async function fetchData<D>(
+  url: string,
+  backupData?: D[] | D
+): Promise<D[] | D> {
   try {
     console.log({ url });
 
     const res: Response = await fetch(url, exerciseOptions);
-    // const data = await res.json();
-    const data = res.ok ? await res.json() : backupData; //?? [];
 
-    if (!res.ok && data) {
-      console.log('Failed to fetch data so backup data is shown');
-    }
-
-    if (!res.ok && !data) {
+    // const data = res.ok ? await res.json() : backupData ? backupData : [];
+    if (!res.ok) {
       console.log('Failed to fetch data');
-      throw new Error(`Error: ${res.status} ${res.statusText}`);
+      if (backupData) {
+        console.log('Failed to fetch data so backup data is shown');
+        return backupData;
+      }
+      throw new Error(`!Error: ${res.status} ${res.statusText}`);
     }
+
+    const data: D | D[] = await res.json();
 
     return data;
   } catch (error: unknown) {
-    console.error('Fetch error:', error);
-    return backupData; //?? [];
+    console.error(
+      'Fetch error:',
+      error instanceof Error ? error.message : error
+    );
+
+    if (Array.isArray(backupData)) {
+      return [];
+    } else {
+      return {} as D;
+    }
   }
 }
 
