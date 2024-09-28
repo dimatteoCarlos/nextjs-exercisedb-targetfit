@@ -77,7 +77,7 @@ function ShowListMenu({
 
       //------endpoint construction-------------
       const urlQuery = `?limit=1325&offset=0`;
-      
+
       // const urlQuery = ``;
       // const urlQuery = `?limit=1325&offset=${Math.floor(Math.random() * 16)}`;
 
@@ -102,17 +102,23 @@ function ShowListMenu({
         url,
         backupExercisesData
       );
+      try {
+        // Solicitar los datos de ejercicios
+        const exercisesData = (await fetchData<ExerciseDataType[]>(
+          url,
+          backupExercisesData
+        )) as ExerciseDataType[];
 
-      // console.log(
-      //   'ExercisesData:',
-      //   exercisesData,
-      //   'exercises found:',
-      //   exercisesData.length
-      // );
+        if (Array.isArray(exercisesData)) {
+          setExerciseData(exercisesData);
+        } else {
+          console.error('Expected exercises data to be an array');
+        }
 
-      setExerciseData(exercisesData);
-
-      router.push(`/show-exercises/?genre=${selectedKeyList}&name=${name}`);
+        router.push(`/show-exercises/?genre=${selectedKeyList}&name=${name}`);
+      } catch (error) {
+        console.error('Error fetching exercises data:', error);
+      }
     }
   };
 
