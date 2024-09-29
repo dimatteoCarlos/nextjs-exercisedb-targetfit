@@ -1,4 +1,4 @@
-
+import { replaceText } from '@/utils/detailTextSynonyms';
 import { ExerciseDataType } from './ShowListMenu';
 
 type DetailPropType = {
@@ -35,10 +35,18 @@ function Detail({ detail }: DetailPropType) {
           </h1>
 
           <p className='dark:text-gray-200 text-[1.25rem] xs:text-[18px]'>
-            Exercises keep you strong.{' '}
-            <span className='capitalize'>{name}</span> is one of the best
-            exercises to target your {target}. It will help you improve your{' '}
-            mood and gain energy.
+            {`${replaceText('exercises')} ${replaceText(
+              'keeps you'
+            )} ${replaceText('strong')}.`}
+            <span className='capitalize'>{name}</span>{' '}
+            {`is ${replaceText('one')} of ${replaceText('the best')}
+            ${replaceText('exercises')} ${replaceText(
+              'to target'
+            )} ${replaceText('your')} ${target}. It will help you ${replaceText(
+              'improve'
+            )} your
+            ${replaceText('mood')} and ${replaceText('gain energy')}`}
+            .
           </p>
 
           <div className=''>
