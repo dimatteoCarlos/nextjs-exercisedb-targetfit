@@ -25,8 +25,7 @@ export const  synonyms : {[key:string]:string[]}= {
   "gain energy": ["increase vitality", "boost energy", "enhance stamina"]
 };
 
-// Ejemplo de uso:
-console.log(synonyms);
+
 
 
 

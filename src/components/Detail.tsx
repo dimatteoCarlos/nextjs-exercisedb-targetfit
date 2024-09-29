@@ -42,9 +42,9 @@ function Detail({ detail }: DetailPropType) {
             {`is ${replaceText('one')} of ${replaceText('the best')}
             ${replaceText('exercises')} ${replaceText(
               'to target'
-            )} ${replaceText('your')} ${target}. It will help you ${replaceText(
-              'improve'
-            )} your
+            )} ${replaceText('your')} ${target}. It ${replaceText(
+              'will help'
+            )} you ${replaceText('improve')} your
             ${replaceText('mood')} and ${replaceText('gain energy')}`}
             .
           </p>
