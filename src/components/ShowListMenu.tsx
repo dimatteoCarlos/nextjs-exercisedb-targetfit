@@ -6,7 +6,7 @@ import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
 //backup data for exercises
 import exercisesBodyPartDataBackup from '../app/_data/bodyParts/exercises/backExercises.json';
-import exercisesEquipmentDataBackup from '../app/_data/equipment/EquipmentExercisesData.json';
+import exercisesEquipmentDataBackup from '../app/_data/equipment/equipmentExercisesData.json';
 import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_target.json';
 import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
 
