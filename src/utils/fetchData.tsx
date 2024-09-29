@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const BASEURL_EXERCISEDB = 'https://exercisedb.p.rapidapi.com';
 
 const API_KEY_EXERCISE = process.env.NEXT_PUBLIC_API_KEY_EXERCISE;
@@ -19,7 +17,6 @@ export const exerciseOptions = {
 // headers: {
 //   'x-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com',
 //   'x-RapidAPI-Key': 'API_KEY_EXERCISE as string',
-// 'x-RapidAPI-Key': API_KEY_EXERCISE as string,
 // },
 // };
 //-------------------
@@ -29,7 +26,7 @@ export async function fetchData<D>(
   backupData?: D[] | D
 ): Promise<D[] | D> {
   try {
-    console.log({ url });
+    // console.log({ url });
 
     const res: Response = await fetch(url, exerciseOptions);
 

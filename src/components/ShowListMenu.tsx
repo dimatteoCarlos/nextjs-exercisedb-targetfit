@@ -70,16 +70,14 @@ function ShowListMenu({
 
     if (list.some((item) => item.name == name)) {
       setSelectedListItem(name);
-      console.log(
-        list.some((item) => item.name == name),
-        { selectedListItem }
-      );
+
+      // console.log(
+      //   list.some((item) => item.name == name),
+      //   { selectedListItem }
+      // );
 
       //------endpoint construction-------------
       const urlQuery = `?limit=1325&offset=0`;
-
-      // const urlQuery = ``;
-      // const urlQuery = `?limit=1325&offset=${Math.floor(Math.random() * 16)}`;
 
       //placeholder for explore and start
       // selectedKeyList == 'explore'
@@ -90,11 +88,11 @@ function ShowListMenu({
 
       const backupExercisesData = exercisesDataBackupKey[selectedKeyList];
 
-      console.log({ selectedListItem }, { urlQuery });
+      // console.log({ selectedListItem }, { urlQuery });
 
-      console.log({ BASEURL_EXERCISEDB }, endpointExercises[selectedKeyList]);
+      // console.log({ BASEURL_EXERCISEDB }, endpointExercises[selectedKeyList]);
 
-      console.log({ url });
+      // console.log({ url });
 
       //----request to api--------------
 

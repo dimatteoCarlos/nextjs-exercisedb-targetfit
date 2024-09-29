@@ -1,4 +1,4 @@
-import React from 'react';
+
 import NavbarLink from './NavbarLink';
 
 function Navbar() {

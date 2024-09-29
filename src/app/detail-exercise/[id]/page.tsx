@@ -13,6 +13,7 @@ type Props = {
 
 function DetailExercise({ params }: Props) {
   const { id } = params;
+  console.log('p:',params)
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
 
@@ -24,7 +25,7 @@ function DetailExercise({ params }: Props) {
     async function getDetailData() {
       try {
         const data = await fetchData<ExerciseDataType>(url);
-        console.log(data);
+        // console.log(data);
 
         if (Array.isArray(data)) {
           if (data.length > 0) {

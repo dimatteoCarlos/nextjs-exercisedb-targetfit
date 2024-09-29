@@ -27,12 +27,13 @@ export default function Card({
     equipment,
     instructions,
   } = exercise;
-  console.log({ gifUrl });
+  // console.log({ gifUrl });
 
   const secondaryTargets = secondaryMuscles.join(', ');
 
   const detailRoute = `detail-exercise/${id}`;
-  // const query = `?/genre=${genre}/selectedName=${selectedName}/id=${id}`;
+  // const query = `/genre=${genre}&selectedName=${selectedName}&id=${id}`;
+  
 
   return (
     // <div className='exercisesCard'>

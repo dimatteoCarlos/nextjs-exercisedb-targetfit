@@ -35,7 +35,7 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
   );
 
   const exercisesToRender = filteredDataExercises.slice(0, 1325);
-  console.log('🚀 ~ ShowExercises ~ exercisesToRender:', exercisesToRender);
+  // console.log('🚀 ~ ShowExercises ~ exercisesToRender:', exercisesToRender);
 
   //const genreTitlesKey:Record<GenreType, string>
   const genreTitlesKey: { [key in GenreType]: string } = {

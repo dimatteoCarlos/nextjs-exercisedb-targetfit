@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ExerciseDataType } from './ShowListMenu';
 
 type DetailPropType = {
