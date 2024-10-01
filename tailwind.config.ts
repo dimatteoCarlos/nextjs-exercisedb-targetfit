@@ -29,6 +29,8 @@ const config: Config = {
     },
   },
 
+  
+
   // variants: {
   //   extend: {
   //     //add variants of colors by dark mode

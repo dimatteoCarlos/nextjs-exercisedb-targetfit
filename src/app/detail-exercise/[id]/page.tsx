@@ -13,7 +13,6 @@ type Props = {
 
 function DetailExercise({ params }: Props) {
   const { id } = params;
-  console.log('p:',params)
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
 

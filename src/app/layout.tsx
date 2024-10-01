@@ -3,11 +3,11 @@ import Head from 'next/head';
 import './globals.css';
 import { Josefin_Sans } from 'next/font/google';
 import Navbar from '@/components/Navbar';
-import SearchBox from '@/components/SearchBox';
 import ThemeContextProvider from '@/context/ThemeContextProvider';
 import Header from '@/components/Header';
 import ExerciseContextProvider from '@/context/ExercisesContextProvider';
 const font = Josefin_Sans({ subsets: ['latin'] });
+// import SearchBox from '@/components/SearchBox';
 
 const titleApp = 'TargetfiT';
 
@@ -29,6 +29,19 @@ export default function RootLayout({
           property='og:CADR'
           content='Coding Architecture for Dynamic Results'
         />
+        <link
+            rel="preload"
+            href="/_next/static/css/app/layout.css?v=1727798135398"
+            as="style"
+          />
+
+<noscript>
+            <link
+              rel="stylesheet"
+              href="/_next/static/css/app/layout.css?v=1727798135398"
+            />
+          </noscript>
+          
       </Head>
       <body className={`${font.className} antialiased`}>
         <ThemeContextProvider>
