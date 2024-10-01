@@ -30,18 +30,19 @@ export default function RootLayout({
           content='Coding Architecture for Dynamic Results'
         />
         <link
-            rel="preload"
-            href="/_next/static/css/app/layout.css?v=1727798135398"
-            as="style"
-          />
+          rel='preload'
+          href='/_next/static/css/app/layout.css?v=1727798135398'
+          as='style'
+        />
 
-<noscript>
-            <link
-              rel="stylesheet"
-              href="/_next/static/css/app/layout.css?v=1727798135398"
-            />
-          </noscript>
-          
+        <link rel='preload' href='/assets/loaders/Spin.svg' as='image' />
+
+        <noscript>
+          <link
+            rel='stylesheet'
+            href='/_next/static/css/app/layout.css?v=1727798135398'
+          />
+        </noscript>
       </Head>
       <body className={`${font.className} antialiased`}>
         <ThemeContextProvider>
