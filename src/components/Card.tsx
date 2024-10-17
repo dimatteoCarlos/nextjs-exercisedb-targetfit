@@ -31,9 +31,10 @@ export default function Card({
 
   const secondaryTargets = secondaryMuscles.join(', ');
 
-  const detailRoute = `detail-exercise/${id}`;
+  // const detailRoute = `detail-exercise/${id}`;
+  const detailRoute = `detail-exercise/${id}?genre=${encodeURIComponent(genre)}`;
   // const query = `/genre=${genre}&selectedName=${selectedName}&id=${id}`;
-  
+  console.log("🚀 ~ detailRoute:", detailRoute)
 
   return (
     // <div className='exercisesCard'>
@@ -41,12 +42,11 @@ export default function Card({
       className='group cursor-pointer sm:hover:shadow-slate-400 sm:shadow-md rounded-lg border border-slate-400 m-3
       sm:m-2 transition-shadow duration-200 text-center sm:text-start'
     >
-      <Link
-        href={{ pathname: detailRoute }}
+      <article
+        //Link href={{ pathname: detailRoute }}
         className='block p-4 bg-gray-200 text-gray-700
            dark:bg-gray-700
            dark:text-gray-300  shadow-lg rounded-lg hover:shadow-xl transition-shadow border-none h-full w-full
-           
            '
       >
         <div className='flex flex-col'>
@@ -91,7 +91,7 @@ export default function Card({
             </span>
           </h2>
         </div>
-      </Link>
+      </article>
     </div>
     // </div>
   );

@@ -9,7 +9,7 @@ function Detail({ detail }: DetailPropType) {
 
   return (
     <>
-      <div
+      <section
         className='card__detail flex justify-between  border-solid border-[0px] border-amber-600
         dark:bg-gray-700  dark:text-gray-300  bg-gray-200 text-gray-700
           shadow-lg hover:shadow-xl transition-shadow  h-full w-full
@@ -18,7 +18,7 @@ function Detail({ detail }: DetailPropType) {
       >
         <div className='img__content shrink-0'>
           <img
-            className='rounded-lg w-full h-full md:min-h-[550px]'
+            className='rounded-lg w-full h-full md:max-h-[550px]'
             src={gifUrl}
             alt={name}
             loading='lazy'
@@ -69,7 +69,7 @@ function Detail({ detail }: DetailPropType) {
             </p>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

@@ -26,7 +26,7 @@ export async function fetchData<D>(
   backupData?: D[] | D
 ): Promise<D[] | D> {
   try {
-    console.log({ url }, "bu:",backupData);
+    // console.log({ url }, "bu:",backupData);
 
     const res: Response = await fetch(url, exerciseOptions);
 
@@ -51,10 +51,9 @@ export async function fetchData<D>(
 
     if (Array.isArray(backupData)) {
       // return [];
-     
-        console.log('Failed to fetch data so backup data is shown');
-        return backupData;
-      
+
+      console.log('Failed to fetch data so backup data is shown');
+      return backupData;
     } else {
       return {} as D;
     }

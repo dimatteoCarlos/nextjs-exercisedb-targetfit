@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 type Props = {
   params: {
-    id: string; // o número, dependiendo de cómo uses el id
+    id: string; 
   };
 };
 
@@ -47,9 +47,9 @@ function DetailExercise({ params }: Props) {
   if (!exerciseDetailData) return <div>No data found</div>;
 
   return (
-    <>
+    <section className=' h-lvh'>
       <Detail detail={exerciseDetailData} />
-    </>
+    </section>
   );
 }
 

@@ -44,6 +44,7 @@ export default function RootLayout({
           />
         </noscript>
       </Head>
+      
       <body className={`${font.className} antialiased`}>
         <ThemeContextProvider>
           <ExerciseContextProvider>

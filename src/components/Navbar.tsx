@@ -1,7 +1,11 @@
 
 import NavbarLink from './NavbarLink';
 
+
 function Navbar() {
+
+
+  
   return (
     <div
       className='flex justify-center gap-6

@@ -5,6 +5,7 @@ import { useExerciseData } from '@/context/ExercisesContextProvider';
 import { ExerciseDataType } from '@/components/ShowListMenu';
 import Card from '@/components/Card';
 import { GenreType } from '@/app/page';
+import { useRouter } from 'next/navigation';
 
 type ShowExercisesPropType = {
   searchParams: {
@@ -14,9 +15,14 @@ type ShowExercisesPropType = {
 };
 
 function ShowExercises({ searchParams }: ShowExercisesPropType) {
+  const router = useRouter();
   const genre = searchParams?.genre;
   const name = searchParams?.name;
   const { exerciseData } = useExerciseData();
+
+  if (!exerciseData) {
+    return <p>Loading Exercises from local data...</p>; // Mensaje de carga
+  }
   const numberOfExercisesFound = exerciseData.length;
   console.log(
     '🚀 ~ ShowExercises ~ numberOfExercisesFound:',
@@ -45,6 +51,8 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
   };
 
   const convertGenreToTitleGenre = (genre: GenreType): string | null => {
+    // return genreTitlesKey[genre] || null;
+
     if (genre in genreTitlesKey) {
       return genreTitlesKey[genre];
     } else {
@@ -53,6 +61,15 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
   };
 
   const titleGenre = convertGenreToTitleGenre(genre);
+  
+
+  //---------------------
+  const handleCardClick = (id: string) => {
+    // Navegar a la página de detalles con el id del elemento
+    router.push(`detail-exercise/${id}?genre=${genre}`);
+
+  };
+
   //--------------------------------------
   return (
     <section className='exercises dark:text-gray-200 dark:bg-gray-800 min-h-lvh'>
@@ -73,13 +90,17 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
         {!!exercisesToRender &&
           exercisesToRender.length > 0 &&
           exercisesToRender?.map((exercise, ind) => (
-            <Card
-              key={exercise.id}
-              genre={genre}
-              selectedName={name}
-              exercise={exercise}
-              cardOrder={ind + 1}
-            />
+            <div key={exercise.id} 
+            onClick={() => handleCardClick(exercise.id)}
+            >
+              <Card
+                // key={exercise.id}
+                genre={genre}
+                selectedName={name}
+                exercise={exercise}
+                cardOrder={ind + 1}
+              />
+            </div>
           ))}
       </div>
     </section>
