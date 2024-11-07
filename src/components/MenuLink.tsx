@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { IconType } from 'react-icons';
+import { usePathname } from 'next/navigation';
 
 type MenuLinkPropsType = {
   Icon: IconType;
@@ -8,9 +9,17 @@ type MenuLinkPropsType = {
 };
 
 function MenuLink({ Icon, title, route }: MenuLinkPropsType) {
+  const pathName = usePathname();
+
+  const isActive = pathName === route;
+  // console.log(pathName, route, isActive);
+
   return (
     <>
-      <Link href={route}>
+      <Link
+        href={route}
+        className={`${isActive && 'text-amber-500 font-semibold'}`}
+      >
         <p className='menuLink__title uppercase hidden font-medium text-[0.875rem] text-sm  sm:inline hoverText'>
           {title}
         </p>

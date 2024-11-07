@@ -13,8 +13,8 @@ export const bannerOptionsName = {
   menBannersKeyList: 'menBannersKeyList',
   bannersKeyExercises: 'bannersKeyExercises',
   otherBannersKeyList: 'otherBannersKeyList',
-};
-
+  onlyWomenBannersKeyList:'onlyWomenBannersKeyList',
+}
 //--------set of banners---------------------------
 export const menBannersKeyList: BannerKeyListType = {
   bodyPart: '/images/banners/bannerManBodyParts.png',
@@ -40,10 +40,11 @@ export const bannersKeyList: BannerKeyListType = {
   equipment: '/images/banners/bannerWomanAndMenEquipment.png',
   // equipment: '/images/banners/bannerEquipment4.png',
   // equipment: '/images/banners/bannerEquipment3.png',
-  explore: '/images/banners/bannerWomenBodyParts.png',
+  // explore: '/images/banners/bannerWomenBodyParts.png',
+  explore: '/images/banners/frontManRunning.png',
   targetMuscle: '/images/banners/bannerMenTargetMuscle.png',
   // targetMuscle: '/images/banners/bannerWomenEquipment.png',
-  start: '/images/banners/bannerWomanAndManBodyParts.png',
+  start: '/images/banners/muscleManRunning.png',
 };
 
 export const bannersKeyExercises: BannerKeyListType = {
@@ -63,6 +64,12 @@ export const otherBannersKeyList: BannerKeyListType = {
   bodyPart: '/images/banners/bannerWomanAndManBodyParts.png',
   equipment: '/images/banners/bannerWomenEquipment.png',
   targetMuscle: '/images/banners/bannerMenBodyParts.png',
+  explore: '/images/banners/bannerExplorer.png',
+};
+export const onlyWomenBannersKeyList: BannerKeyListType = {
+  bodyPart: '/images/banners/bannerWomanBodyParts.png',
+  equipment: '/images/banners/womanMuscleExercising.png',
+  targetMuscle: '/images/banners/bannerWomenTargetMuscle.png',
   explore: '/images/banners/bannerExplorer.png',
 };
 

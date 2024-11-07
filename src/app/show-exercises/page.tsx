@@ -15,19 +15,20 @@ type ShowExercisesPropType = {
 };
 
 function ShowExercises({ searchParams }: ShowExercisesPropType) {
-  const router = useRouter();
   const genre = searchParams?.genre;
   const name = searchParams?.name;
+
+  const router = useRouter();
   const { exerciseData } = useExerciseData();
 
   if (!exerciseData) {
     return <p>Loading Exercises from local data...</p>; // Mensaje de carga
   }
   const numberOfExercisesFound = exerciseData.length;
-  console.log(
-    '🚀 ~ ShowExercises ~ numberOfExercisesFound:',
-    numberOfExercisesFound
-  );
+  // console.log(
+  //   '🚀 ~ ShowExercises ~ numberOfExercisesFound:',
+  //   numberOfExercisesFound
+  // );
 
   const filteredDataExercises =
     exerciseData?.filter(
@@ -61,13 +62,11 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
   };
 
   const titleGenre = convertGenreToTitleGenre(genre);
-  
 
   //---------------------
   const handleCardClick = (id: string) => {
     // Navegar a la página de detalles con el id del elemento
-    router.push(`detail-exercise/${id}?genre=${genre}`);
-
+    router.push(`detail-exercise/${id}?genre=${genre}&name=${name}`);
   };
 
   //--------------------------------------
@@ -90,11 +89,8 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
         {!!exercisesToRender &&
           exercisesToRender.length > 0 &&
           exercisesToRender?.map((exercise, ind) => (
-            <div key={exercise.id} 
-            onClick={() => handleCardClick(exercise.id)}
-            >
+            <div key={exercise.id} onClick={() => handleCardClick(exercise.id)}>
               <Card
-                // key={exercise.id}
                 genre={genre}
                 selectedName={name}
                 exercise={exercise}

@@ -1,40 +1,76 @@
 'use client';
 
-import Detail from '@/components/Detail';
 import { ExerciseDataType } from '@/components/ShowListMenu';
-import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
+import fetchData from '@/utils/fetchData';
+import Detail from '@/components/Detail';
+import {
+  BASEURL_EXERCISEDB,
+  exerciseOptions,
+  endpointDetail,
+} from '@/utils/fetchConstants';
+
+import {
+  BASEURL_youtubeSearch,
+  youtubeSearchOptions,
+  endpointYTSD,
+} from '@/utils/fetchConstants';
+
 import { useEffect, useState } from 'react';
+import { SearchParamsType } from '../../page';
+import ExerciseVideos from '@/components/ExerciseVideos';
 
 type Props = {
   params: {
-    id: string; 
+    id: string;
   };
+  searchParams: SearchParamsType['searchParams'];
 };
-
-function DetailExercise({ params }: Props) {
+//-------------------------------------------------
+function DetailExercise({ searchParams, params }: Props) {
+  console.log('params:', params, searchParams);
   const { id } = params;
+  const { genre, name } = searchParams;
+
+  const exerciseName = name ?? 'back';
+
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
 
-  //---build url----
-  const url = `${BASEURL_EXERCISEDB}/exercises/exercise/${id}`;
+  const [exerciseVideos, setExerciseVideos] = useState<[] | null>([]);
 
-  //Request from api
+  //***************************************** */
+  //---build exercise detail url---
+  const exerciseUrl = `${BASEURL_EXERCISEDB}${endpointDetail}${id}`;
+  //Request from exercisedb api
+
   useEffect(() => {
+    function handleExerciseDetailData(
+      data: ExerciseDataType | ExerciseDataType[]
+    ) {
+      if (Array.isArray(data)) {
+        if (data.length > 0) {
+          console.log('1', data);
+          setExerciseDetailData(data[0]);
+        } else {
+          console.log('2', data);
+          setExerciseDetailData(null);
+        }
+      } else {
+        const isEmpty = Object.keys(data).length === 0;
+        console.log('3', data);
+
+        setExerciseDetailData(isEmpty ? null : data);
+      }
+    }
+    //-----
     async function getDetailData() {
       try {
-        const data = await fetchData<ExerciseDataType>(url);
+        const data = await fetchData<ExerciseDataType>(
+          exerciseUrl,
+          exerciseOptions
+        );
         // console.log(data);
-
-        if (Array.isArray(data)) {
-          if (data.length > 0) {
-            setExerciseDetailData(data[0]);
-          } else {
-            setExerciseDetailData(null);
-          }
-        } else {
-          setExerciseDetailData(data);
-        }
+        handleExerciseDetailData(data);
       } catch (error) {
         console.error('Error fetching exercise detail:', error);
         setExerciseDetailData(null);
@@ -42,13 +78,44 @@ function DetailExercise({ params }: Props) {
     }
 
     getDetailData();
-  }, [id, url]);
+  }, [id]);
 
-  if (!exerciseDetailData) return <div>No data found</div>;
+  console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
 
+  //******************************************/
+  //---build youtubevideos url---
+  // youtubeSearchOptions,
+
+  const videosUrl = `${BASEURL_youtubeSearch}${endpointYTSD(exerciseName)}`;
+
+  console.log('🚀 ~ DetailExercise ~ videosUrl:', videosUrl);
+
+  useEffect(() => {
+    async function getVideosData() {
+      try {
+        const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
+        console.log(data.next, 'NEXT');
+        setExerciseVideos(data.contents);
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+        setExerciseVideos(null);
+      }
+    }
+
+    getVideosData();
+  }, [exerciseName]);
+
+  //--------------------------------------------------
   return (
-    <section className=' h-lvh'>
-      <Detail detail={exerciseDetailData} />
+    <section className='text-gray-800 dark:text-gray-200 dark:bg-gray-800 h-lvh'>
+      {exerciseDetailData && <Detail detail={exerciseDetailData} />}
+
+      {exerciseVideos && (
+        <ExerciseVideos
+          exerciseVideos={exerciseVideos}
+          exerciseName={exerciseName}
+        />
+      )}
     </section>
   );
 }

@@ -32,9 +32,9 @@ export default function Card({
   const secondaryTargets = secondaryMuscles.join(', ');
 
   // const detailRoute = `detail-exercise/${id}`;
-  const detailRoute = `detail-exercise/${id}?genre=${encodeURIComponent(genre)}`;
+  // const detailRoute = `detail-exercise/${id}?genre=${encodeURIComponent(genre)}`;
   // const query = `/genre=${genre}&selectedName=${selectedName}&id=${id}`;
-  console.log("🚀 ~ detailRoute:", detailRoute)
+  // console.log("🚀 ~ detailRoute:", detailRoute)
 
   return (
     // <div className='exercisesCard'>
@@ -76,6 +76,7 @@ export default function Card({
             </button>
             <button className='ml-5 text-white bg-green-700 text-sm rounded-full px-3 py-1 capitalize'>
               {target}
+              {/* {selectedName} */}
             </button>
           </div>
 

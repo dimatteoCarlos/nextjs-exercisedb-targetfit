@@ -19,7 +19,6 @@ export function getSelectedBannerGroup({
 
   const bannerStored: string | null = localStorage.getItem(localStorageKey);
 
-  //incluir si es un json valido
   const selectedBannerGroup: string =
     bannerStored &&
     bannerStored != null &&

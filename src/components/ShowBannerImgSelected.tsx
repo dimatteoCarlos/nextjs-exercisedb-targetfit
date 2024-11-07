@@ -6,6 +6,7 @@ import {
   otherBannersKeyList,
   bannersKeyList,
   BannerKeyListType,
+  onlyWomenBannersKeyList
 } from '@/utils/bannersDefinition';
 
 import { SearchParamsType } from '@/app/page';
@@ -19,7 +20,8 @@ export type BannerSelectionPropType = {
     | 'womenBannersKeyList'
     | 'bannersKeyList'
     | 'bannersKeyExercises'
-    | 'otherBannersKeyList';
+    | 'otherBannersKeyList'
+    | 'onlyWomenBannersKeyList';
 };
 
 //---------------------------------------
@@ -35,6 +37,7 @@ export const bannerOptions: BannerOptionsType = {
   menBannersKeyList,
   bannersKeyExercises,
   otherBannersKeyList,
+  onlyWomenBannersKeyList
 };
 
 //----------------------------

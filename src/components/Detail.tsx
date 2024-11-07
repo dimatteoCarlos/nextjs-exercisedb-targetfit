@@ -1,11 +1,30 @@
+//
+
+'use client';
+
 import { replaceText } from '@/utils/detailTextSynonyms';
 import { ExerciseDataType } from './ShowListMenu';
+import { useSearchParams } from 'next/navigation';
+import Loading from '@/app/loading';
 
 type DetailPropType = {
   detail: ExerciseDataType;
 };
 function Detail({ detail }: DetailPropType) {
-  const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
+  const searchParams = useSearchParams();
+  // Obtener los parámetros de búsqueda
+  const genre = searchParams.get('genre');
+  const selectedName = searchParams.get('name');
+
+
+    const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
+
+    if (!detail)
+      return (
+        <>
+          <Loading />{' '}
+        </>
+      );
 
   return (
     <>
@@ -42,9 +61,11 @@ function Detail({ detail }: DetailPropType) {
             {`is ${replaceText('one')} of ${replaceText('the best')}
             ${replaceText('exercises')} ${replaceText(
               'to target'
-            )} ${replaceText('your')} ${target}. It ${replaceText(
-              'will help'
-            )} you ${replaceText('improve')} your
+            )} ${replaceText('your')} "${
+              target ? target : selectedName
+            }". It ${replaceText('will help')} you ${replaceText(
+              'improve'
+            )} your
             ${replaceText('mood')} and ${replaceText('gain energy')}`}
             .
           </p>

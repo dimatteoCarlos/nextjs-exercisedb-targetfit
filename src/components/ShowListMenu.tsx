@@ -1,14 +1,18 @@
 'use client';
-// import RightArrowIcon from '../../public/assets/icons/right-arrow.png';
-// import LeftArrowIcon from '../../public/assets/icons/left-arrow.png';
+import fetchData from '@/utils/fetchData';
+import {
+  BASEURL_EXERCISEDB,
+  exerciseOptions,
+  endpointList,
+} from '@/utils/fetchConstants';
+
 import { ListItemType, SearchParamsType } from '@/app/page';
-import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
 
 //backup data for exercises
 import exercisesBodyPartDataBackup from '../app/_data/bodyParts/exercises/backExercises.json';
 import exercisesEquipmentDataBackup from '../app/_data/equipment/equipmentExercisesData.json';
 import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_target.json';
-import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
+// import exerciseExploreDataBackup from '../app/_data/exercises/exerciseId.json';
 
 import { useRouter } from 'next/navigation';
 import { useExerciseData } from '@/context/ExercisesContextProvider';
@@ -64,7 +68,7 @@ function ShowListMenu({
   const { setExerciseData } = useExerciseData();
   const router = useRouter();
 
-  //-----get name from item list menu to fetch exercises------
+  //----get name from item list menu to fetch exercises---
   const handleSelectedItem = async (name: string) => {
     // console.log({ name }, list);
 
@@ -96,14 +100,11 @@ function ShowListMenu({
 
       //----request to api--------------
 
-      const exercisesData = await fetchData<ExerciseDataType>(
-        url,
-        backupExercisesData
-      );
       try {
-        // Solicitar los datos de ejercicios
+        // get exercise data
         const exercisesData = (await fetchData<ExerciseDataType[]>(
           url,
+          exerciseOptions,
           backupExercisesData
         )) as ExerciseDataType[];
 
@@ -120,11 +121,10 @@ function ShowListMenu({
     }
   };
 
-  //========================
+  //==================================================
 
   return (
     <>
-      {/* List Menu */}
       <div
         className={`listMenu ${
           list.length > 12 ? '' : 'scroll-menu-wrapper'
@@ -168,8 +168,6 @@ function ShowListMenu({
           );
         })}
       </div>
-
-      {/* </div> */}
     </>
   );
 }

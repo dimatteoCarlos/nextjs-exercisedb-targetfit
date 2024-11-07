@@ -1,11 +1,16 @@
 'use server';
 
-import fetchData, { BASEURL_EXERCISEDB } from '@/utils/fetchData';
-
+import fetchData from '@/utils/fetchData';
+import {
+  BASEURL_EXERCISEDB,
+  exerciseOptions,
+  endpointList,
+} from '@/utils/fetchConstants';
 import HeroBanner from '@/components/HeroBanner';
 import ShowListMenu from '@/components/ShowListMenu';
 
 //----------backup data ------------
+//exercises:
 import { bodyPartList, targetList, equipmentList } from './_data/dataList'; //list names by genre
 import {
   bodyPartListImg,
@@ -36,6 +41,7 @@ export type SearchParamsType = {
   searchParams: {
     genre: 'bodyPart' | 'equipment' | 'targetMuscle';
     //  | 'explore' | 'start';
+    name?: string;
   };
 };
 
@@ -58,30 +64,21 @@ const listImgBackup = {
   // explore: {},
   // start: {},
 };
-//----------------------
-const endpointList = {
-  bodyPart: '/exercises/bodyPartList',
-  equipment: '/exercises/equipmentList',
-  targetMuscle: '/exercises/targetList',
-  // explore: `/exercises?limit=20&offset=${Math.floor(
-  //   Math.random() * (1324 - 20)
-  // )}`,
-  // start: '',
-  //search
-};
 
-//--------------------c
+//--------------------
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
   const selectedKeyList = genre ? genre : 'bodyPart'; //start
-
+  //-------API info -------------
+  //------exercisedb endpoints -------
   //---build url----
   const url = `${BASEURL_EXERCISEDB}${endpointList[selectedKeyList]}`;
   const backupDataList = listDataBackup[selectedKeyList];
 
+  //-------------------------------------------------------------------
   //Request of listData from api
 
-  const list = await fetchData<string>(url, backupDataList);
+  const list = await fetchData<string>(url, exerciseOptions, backupDataList);
 
   console.log('List:', list);
 
@@ -112,12 +109,8 @@ export default async function Home({ searchParams }: SearchParamsType) {
   return (
     <>
       <HeroBanner selectedKeyList={selectedKeyList} />
-      {/* <div className='listMenu '> */}
-      {/* ListMenu */}
+
       <ShowListMenu list={listData} selectedKeyList={selectedKeyList} />
-      {/* </div> */}
     </>
   );
 }
-
-
