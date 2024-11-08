@@ -27,9 +27,9 @@ type Props = {
 };
 //-------------------------------------------------
 function DetailExercise({ searchParams, params }: Props) {
-  console.log('params:', params, searchParams);
   const { id } = params;
   const { genre, name } = searchParams;
+  console.log('params:', params, genre);
 
   const exerciseName = name ?? 'back';
 
@@ -40,7 +40,7 @@ function DetailExercise({ searchParams, params }: Props) {
 
   //***************************************** */
   //---build exercise detail url---
-  const exerciseUrl = `${BASEURL_EXERCISEDB}${endpointDetail}${id}`;
+  const exerciseUrl = `${BASEURL_EXERCISEDB}${endpointDetail}/${id}`;
   //Request from exercisedb api
 
   useEffect(() => {
@@ -49,15 +49,15 @@ function DetailExercise({ searchParams, params }: Props) {
     ) {
       if (Array.isArray(data)) {
         if (data.length > 0) {
-          console.log('1', data);
+          // console.log('1', data);
           setExerciseDetailData(data[0]);
         } else {
-          console.log('2', data);
+          // console.log('2', data);
           setExerciseDetailData(null);
         }
       } else {
         const isEmpty = Object.keys(data).length === 0;
-        console.log('3', data);
+        // console.log('3', data);
 
         setExerciseDetailData(isEmpty ? null : data);
       }
@@ -80,7 +80,7 @@ function DetailExercise({ searchParams, params }: Props) {
     getDetailData();
   }, [id]);
 
-  console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
+  // console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
 
   //******************************************/
   //---build youtubevideos url---
@@ -88,13 +88,13 @@ function DetailExercise({ searchParams, params }: Props) {
 
   const videosUrl = `${BASEURL_youtubeSearch}${endpointYTSD(exerciseName)}`;
 
-  console.log('🚀 ~ DetailExercise ~ videosUrl:', videosUrl);
+  // console.log('🚀 ~ DetailExercise ~ videosUrl:', videosUrl);
 
   useEffect(() => {
     async function getVideosData() {
       try {
         const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
-        console.log(data.next, 'NEXT');
+        // console.log(data.next, 'NEXT');
         setExerciseVideos(data.contents);
       } catch (error) {
         console.error('Error fetching videos:', error);
@@ -107,7 +107,7 @@ function DetailExercise({ searchParams, params }: Props) {
 
   //--------------------------------------------------
   return (
-    <section className='text-gray-800 dark:text-gray-200 dark:bg-gray-800 h-lvh'>
+    <section className='text-gray-800 dark:text-gray-200 dark:bg-gray-800'>
       {exerciseDetailData && <Detail detail={exerciseDetailData} />}
 
       {exerciseVideos && (

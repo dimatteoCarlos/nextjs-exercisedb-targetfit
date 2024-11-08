@@ -80,7 +80,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
 
   const list = await fetchData<string>(url, exerciseOptions, backupDataList);
 
-  console.log('List:', list);
+  // console.log('List:', list);
 
   //---build menu list with images from local files----/
   function constructListMenu(listName: string[], listImg: ListImgType) {

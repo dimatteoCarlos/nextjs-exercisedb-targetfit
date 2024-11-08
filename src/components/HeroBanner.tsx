@@ -23,7 +23,7 @@ const HeroBanner = ({ selectedKeyList }: HeroBannerPropsType) => {
       localStorageKey,
       bannerOptionsName,
     });
-    console.log('useEffect:', chosenBannerGroup);
+    // console.log('useEffect:', chosenBannerGroup);
     setSelectedBannerGroup(chosenBannerGroup);
   }, []);
 

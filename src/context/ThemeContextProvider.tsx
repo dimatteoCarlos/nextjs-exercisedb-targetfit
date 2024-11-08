@@ -56,7 +56,7 @@ function ThemeContextProvider({ children }: ThemeContextProviderPropsType) {
   const changeTheme = (newTheme?: ThemeType) => {
     const themeToApply = newTheme || theme === 'dark' ? 'light' : 'dark';
     // const themeToApply = newTheme ? newTheme : toggleTheme(theme);
-    console.log('theme:', theme, { themeToApply });
+    // console.log('theme:', theme, { themeToApply });
     setTheme(themeToApply);
     localStorage.setItem('theme', themeToApply);
     // Remove the old theme class and add the new one

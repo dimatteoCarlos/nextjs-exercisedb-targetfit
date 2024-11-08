@@ -16,23 +16,22 @@ function Detail({ detail }: DetailPropType) {
   const genre = searchParams.get('genre');
   const selectedName = searchParams.get('name');
 
+  const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
 
-    const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
-
-    if (!detail)
-      return (
-        <>
-          <Loading />{' '}
-        </>
-      );
+  if (!detail)
+    return (
+      <>
+        <Loading />{' '}
+      </>
+    );
 
   return (
     <>
-      <section
+      <article
         className='card__detail flex justify-between  border-solid border-[0px] border-amber-600
         dark:bg-gray-700  dark:text-gray-300  bg-gray-200 text-gray-700
           shadow-lg hover:shadow-xl transition-shadow  h-full w-full
-        flex-col lg:flex-row gap-[32px] p-5 items-center
+        flex-col lg:flex-row gap-[2rem] p-5 items-center
           '
       >
         <div className='img__content shrink-0'>
@@ -90,7 +89,7 @@ function Detail({ detail }: DetailPropType) {
             </p>
           </div>
         </div>
-      </section>
+      </article>
     </>
   );
 }
