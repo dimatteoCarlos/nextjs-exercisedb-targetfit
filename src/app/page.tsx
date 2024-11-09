@@ -65,11 +65,13 @@ const listImgBackup = {
   // start: {},
 };
 
+const defaultGenre='bodyPart';
+
 //--------------------
 export default async function Home({ searchParams }: SearchParamsType) {
   const genre = searchParams?.genre;
-  const selectedKeyList = genre ? genre : 'bodyPart'; //start
-  //-------API info -------------
+  const selectedKeyList = genre ? genre : defaultGenre ; //start
+  //-------API info -----------------
   //------exercisedb endpoints -------
   //---build url----
   const url = `${BASEURL_EXERCISEDB}${endpointList[selectedKeyList]}`;
