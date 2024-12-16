@@ -53,7 +53,6 @@ function ShowExercises() {
   };
 
   const convertGenreToTitleGenre = (genre: GenreType): string | null => {
-    // return genreTitlesKey[genre] || null;
     return genreTitlesKey[genre] || null;
   };
 
@@ -61,7 +60,6 @@ function ShowExercises() {
 
   //---------------------
   const handleCardClick = (id: string) => {
-    // Navegar a la página de detalles con el id del elemento
     router.push(`detail-exercise/${id}?genre=${genre}&name=${name}`);
   };
 
@@ -69,10 +67,10 @@ function ShowExercises() {
   return (
     <section className='exercises dark:text-gray-200 dark:bg-gray-800 min-h-lvh'>
       <div className='exercisesTitle '>
-        <p className=' text-[1.25rem] text-center font-bold items-center p-3 capitalize'>
+        <h2 className=' text-[1.25rem] text-center font-bold items-center p-3 capitalize'>
           {`${titleGenre} : `}{' '}
           <span className='text-amber-600 font-semibold'> {name}</span>
-        </p>
+        </h2>
         <p className='text-center mx-auto font-normal text-[1rem] '>
           {numberOfExercisesFound} exercises found
         </p>

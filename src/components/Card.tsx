@@ -61,7 +61,7 @@ export default function Card({
               className='sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300 inline-block
               '
               alt={name}
-              // loading='lazy'
+              loading='lazy'
             />
           )}
         </div>
