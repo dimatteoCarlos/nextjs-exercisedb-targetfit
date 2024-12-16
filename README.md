@@ -7,7 +7,6 @@
 - **Targeted Muscle Training:** Focus on specific muscle groups with customized exercise routines.
 - **Intuitive Layout:** Easily navigate through muscle groups and find exercises that fit your fitness needs.
 - **Effective Guidance:** Step-by-step instructions, images, and videos to ensure proper form and technique for each exercise.
-- **Community Support:** Engage with a community of fitness enthusiasts for tips, experiences, and encouragement.
 
 ## App Details
 
