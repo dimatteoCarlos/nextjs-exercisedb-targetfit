@@ -14,9 +14,9 @@ type DetailPropType = {
   const searchParams =  useSearchParams();
   // Obtener los parámetros de búsqueda
   const genre =  searchParams.get('genre');
-  console.log("🚀 ~ Detail ~ genre:", genre)
   const selectedName =  searchParams.get('name');
-
+  
+  console.log("🚀 ~ Detail ~ genre , name:", genre, name)
   const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
 
   if (!detail)

@@ -30,7 +30,7 @@ type Props = {
  function DetailExercise() {
   const searchParamsAwaited=useSearchParams()
   const id = searchParamsAwaited.get('id')
-  const genre =searchParamsAwaited.get('genre'); 
+  // const genre =searchParamsAwaited.get('genre'); 
   const name= searchParamsAwaited.get('name'); 
   console.log('params:',searchParamsAwaited);
 
