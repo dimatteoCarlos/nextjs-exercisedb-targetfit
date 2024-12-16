@@ -6,12 +6,12 @@ import Card from '@/components/Card';
 import { GenreType } from '@/app/page';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-type ShowExercisesPropType = {
-  searchParams: {
-    genre: SearchParamsType['searchParams']['genre'];
-    name: string;
-  };
-};
+// type ShowExercisesPropType = {
+//   searchParams: {
+//     genre: SearchParamsType['searchParams']['genre'];
+//     name: string;
+//   };
+// };
 
 function ShowExercises() {
   // Use the useSearchParams hook to get searchParams
