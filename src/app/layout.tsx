@@ -2,11 +2,21 @@ import type { Metadata } from 'next';
 import Head from 'next/head';
 import './globals.css';
 import { Josefin_Sans } from 'next/font/google';
-import Navbar from '@/components/Navbar';
+import { Plus_Jakarta_Sans } from 'next/font/google';
+
 import ThemeContextProvider from '@/context/ThemeContextProvider';
+
+import Navbar from '@/components/Navbar';
 import Header from '@/components/Header';
 import ExerciseContextProvider from '@/context/ExercisesContextProvider';
-const font = Josefin_Sans({ subsets: ['latin'] });
+// const font = Josefin_Sans({ subsets: ['latin'] });
+const font = Plus_Jakarta_Sans({ subsets: ['latin'],
+
+weight:['300','400','500','600','700'],
+variable:'--font-sans',
+});
+
+
 // import SearchBox from '@/components/SearchBox';
 
 const titleApp = 'TargetfiT';
@@ -29,7 +39,9 @@ export default function RootLayout({
           property='og:CADR'
           content='Coding Architecture for Dynamic Results'
         />
-        <link
+
+      
+        {/* <link
           rel='preload'
           href='/_next/static/css/app/layout.css?v=1727798135398'
           as='style'
@@ -42,7 +54,7 @@ export default function RootLayout({
             rel='stylesheet'
             href='/_next/static/css/app/layout.css?v=1727798135398'
           />
-        </noscript>
+        </noscript> */}
       </Head>
       
       <body className={`${font.className} antialiased`}>

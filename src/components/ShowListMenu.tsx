@@ -65,6 +65,7 @@ function ShowListMenu({
   selectedKeyList,
 }: ShowListMenuPropType): React.JSX.Element {
   const [selectedListItem, setSelectedListItem] = useState<string | null>(null);
+  
   const { setExerciseData } = useExerciseData();
   const router = useRouter();
 
@@ -136,7 +137,7 @@ function ShowListMenu({
       >
         {list.map((item, indx) => {
           const imgUrl =
-            item.img !== '' || !item.img ? item.img : '/images/notFoundImg.png';
+          (  item.img !== '' || !item.img )? item.img : '/images/notFoundImg.png';
 
           return (
             <div

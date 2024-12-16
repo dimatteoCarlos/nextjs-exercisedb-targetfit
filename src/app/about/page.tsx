@@ -1,12 +1,10 @@
 import Image from 'next/image';
 
-function About() {
+export default function About() {
   return (
-    <section
+    <div
       className='about__container max-w-6xl p-3 mx-auto space-y-[1rem] 
-    dark:bg-gray-800 dark:text-white h-full lg:h-lvh
-    
-    '
+    dark:bg-gray-800 dark:text-white h-full lg:h-lvh'
     >
       <h1 className='about__title text-2xl text-amber-600 font-semibold pt-4'>
         About Us
@@ -69,14 +67,12 @@ function About() {
         {' '}
         Thank you for stopping by! We appreciate your interest in optimizing
         your fitness journey with our platform. Your commitment to training and
-        improving your health inspires us, and we’re excited to support you
+        improving your health inspires us, and we are excited to support you
         every step of the way.
         {/* If you have any questions or feedback, feel free to reach out—we're here to help you succeed! */}
       </p>
-
-      <p>{’.fromCharCode()} {String.fromCodePoint(2192)}</p>
-    </section>
+    </div>
   );
 }
 
-export default About;
+// export default About;

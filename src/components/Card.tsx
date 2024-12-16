@@ -6,26 +6,26 @@ import { GenreType } from '@/app/page';
 
 type CardPropsType = {
   exercise: ExerciseDataType;
-  genre: GenreType;
-  selectedName: string;
+  genre?: GenreType;
+  selectedName?: string;
   cardOrder: number;
 };
 
 export default function Card({
   exercise,
-  selectedName,
-  genre,
+  // selectedName,
+  // genre,
   cardOrder,
 }: CardPropsType) {
   const {
-    id,
+    // id,
     bodyPart,
     gifUrl,
     name,
     target,
     secondaryMuscles,
-    equipment,
-    instructions,
+    // equipment,
+    // instructions,
   } = exercise;
   // console.log({ gifUrl });
 

@@ -1,11 +1,10 @@
 'use client';
-// import { useSearchParams } from 'next/navigation';
 import { SearchParamsType } from '@/app/page';
 import { useExerciseData } from '@/context/ExercisesContextProvider';
 import { ExerciseDataType } from '@/components/ShowListMenu';
 import Card from '@/components/Card';
 import { GenreType } from '@/app/page';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 type ShowExercisesPropType = {
   searchParams: {
@@ -14,9 +13,11 @@ type ShowExercisesPropType = {
   };
 };
 
-function ShowExercises({ searchParams }: ShowExercisesPropType) {
-  const genre = searchParams?.genre;
-  const name = searchParams?.name;
+function ShowExercises() {
+  // Use the useSearchParams hook to get searchParams
+  const searchParams = useSearchParams();
+  const genre = (searchParams?.get('genre') as GenreType) || null; // Access query param genre
+  const name = searchParams?.get('name') || ''; // Access query param name
 
   const router = useRouter();
   const { exerciseData } = useExerciseData();
@@ -53,12 +54,7 @@ function ShowExercises({ searchParams }: ShowExercisesPropType) {
 
   const convertGenreToTitleGenre = (genre: GenreType): string | null => {
     // return genreTitlesKey[genre] || null;
-
-    if (genre in genreTitlesKey) {
-      return genreTitlesKey[genre];
-    } else {
-      return null;
-    }
+    return genreTitlesKey[genre] || null;
   };
 
   const titleGenre = convertGenreToTitleGenre(genre);
