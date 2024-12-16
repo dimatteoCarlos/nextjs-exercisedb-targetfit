@@ -46,7 +46,7 @@ function ExerciseVideos({
           </span>
         </p>
         <p className='text-center mx-auto font-normal text-[1rem] '>
-          {exerciseVideos.length} videos found - maximum of 10 shown
+          {exerciseVideos.length} videos found 
         </p>
       </div>
 
