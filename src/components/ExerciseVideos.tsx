@@ -1,5 +1,5 @@
 import Loading from '@/app/loading';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 type ExerciseVideoType = {
@@ -46,7 +46,7 @@ function ExerciseVideos({
           </span>
         </p>
         <p className='text-center mx-auto font-normal text-[1rem] '>
-          {exerciseVideos.length} videos found - maximum of 10 shown
+          {exerciseVideos.length} videos found 
         </p>
       </div>
 
@@ -55,13 +55,13 @@ function ExerciseVideos({
 
         {!!exerciseVideos &&
           exerciseVideos.length > 0 &&
-          exerciseVideos.slice(0, 10)?.map((video, ind) => (
+          exerciseVideos?.map((video, ind) => (
+            // exerciseVideos.slice(0, 20)?.map((video, ind) => (
             <Link
               href={`https://www.youtube.com/watch?v=${video.video.videoId}`}
               key={video.video.videoId}
               target='_blank'
               rel='noreferrer'
-
             >
               <div className={'mt-2 py-4 '}>
                 <img
@@ -77,7 +77,10 @@ function ExerciseVideos({
                   <h3 className='text-lg  pt-2 font-semibold '>
                     {video.video.title}
                   </h3>
-                  <p className='text-sm '>{video.video.channelName}</p>
+                  <p className='text-sm '>
+                    {ind}
+                    {video.video.channelName}
+                  </p>
                 </div>
               </div>
             </Link>

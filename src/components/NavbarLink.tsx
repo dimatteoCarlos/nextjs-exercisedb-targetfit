@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-
 type NavbarLinkPropsType = {
   param: string;
   title: string;
@@ -15,10 +14,6 @@ function NavbarLink({ param, title }: NavbarLinkPropsType) {
   const isActive = genre === param;
 
   //-----------------------
-  // const router = useRouter();
-  // const { pathname } = router;
-  // const isActive = (link:string) => pathname.startsWith(link);
-  // console.log("🚀 ~ NavbarLink ~ isActive:", isActive)
 
   return (
     <div>

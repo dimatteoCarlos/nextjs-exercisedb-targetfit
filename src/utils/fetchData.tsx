@@ -37,11 +37,19 @@ export async function fetchData<D>(
 
     // const data = res.ok ? await res.json() : backupData ? backupData : [];
     if (!res.ok) {
+      if (res.status === 422) {
+        console.error(
+          'Error 422: Unprocessable Entity. The request was well-formed but unable to be processed.'
+        );
+      }
+
       console.log('Failed to fetch data');
+
       if (backupData) {
         console.log('Failed to fetch data so backup data is shown');
         return backupData;
       }
+
       throw new Error(`!Error: ${res.status} ${res.statusText}`);
     }
 
