@@ -1,23 +1,22 @@
 'use client';
+// import { useSearchParams } from 'next/navigation';
 import { SearchParamsType } from '@/app/page';
 import { useExerciseData } from '@/context/ExercisesContextProvider';
 import { ExerciseDataType } from '@/components/ShowListMenu';
 import Card from '@/components/Card';
 import { GenreType } from '@/app/page';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-// type ShowExercisesPropType = {
-//   searchParams: {
-//     genre: SearchParamsType['searchParams']['genre'];
-//     name: string;
-//   };
-// };
+type ShowExercisesPropType = {
+  searchParams: {
+    genre: SearchParamsType['searchParams']['genre'];
+    name: string;
+  };
+};
 
-function ShowExercises() {
-  // Use the useSearchParams hook to get searchParams
-  const searchParams = useSearchParams();
-  const genre = (searchParams?.get('genre') as GenreType) || null; // Access query param genre
-  const name = searchParams?.get('name') || ''; // Access query param name
+function ShowExercises({ searchParams }: ShowExercisesPropType) {
+  const genre = searchParams?.genre;
+  const name = searchParams?.name;
 
   const router = useRouter();
   const { exerciseData } = useExerciseData();
@@ -53,13 +52,20 @@ function ShowExercises() {
   };
 
   const convertGenreToTitleGenre = (genre: GenreType): string | null => {
-    return genreTitlesKey[genre] || null;
+    // return genreTitlesKey[genre] || null;
+
+    if (genre in genreTitlesKey) {
+      return genreTitlesKey[genre];
+    } else {
+      return null;
+    }
   };
 
   const titleGenre = convertGenreToTitleGenre(genre);
 
   //---------------------
   const handleCardClick = (id: string) => {
+    // Navegar a la página de detalles con el id del elemento
     router.push(`detail-exercise/${id}?genre=${genre}&name=${name}`);
   };
 
@@ -67,10 +73,10 @@ function ShowExercises() {
   return (
     <section className='exercises dark:text-gray-200 dark:bg-gray-800 min-h-lvh'>
       <div className='exercisesTitle '>
-        <h2 className=' text-[1.25rem] text-center font-bold items-center p-3 capitalize'>
+        <p className=' text-[1.25rem] text-center font-bold items-center p-3 capitalize'>
           {`${titleGenre} : `}{' '}
           <span className='text-amber-600 font-semibold'> {name}</span>
-        </h2>
+        </p>
         <p className='text-center mx-auto font-normal text-[1rem] '>
           {numberOfExercisesFound} exercises found
         </p>

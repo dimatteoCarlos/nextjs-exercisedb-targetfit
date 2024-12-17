@@ -10,13 +10,12 @@ import Loading from '@/app/loading';
 type DetailPropType = {
   detail: ExerciseDataType;
 };
-  function Detail({ detail }: DetailPropType) {
-  const searchParams =  useSearchParams();
+function Detail({ detail }: DetailPropType) {
+  const searchParams = useSearchParams();
   // Obtener los parámetros de búsqueda
-  const genre =  searchParams.get('genre');
-  const selectedName =  searchParams.get('name');
-  
-  console.log("🚀 ~ Detail ~ genre , name:", genre, selectedName)
+  const genre = searchParams.get('genre');
+  const selectedName = searchParams.get('name');
+
   const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
 
   if (!detail)
@@ -56,8 +55,8 @@ type DetailPropType = {
           <p className='dark:text-gray-200 text-[1.25rem] xs:text-[18px]'>
             {`${replaceText('exercises')} ${replaceText(
               'keeps you'
-            )} ${replaceText('strong')}. `}
-            <span className='capitalize text-amber-500'>{name}</span>{' '}
+            )} ${replaceText('strong')}.`}
+            <span className='capitalize'>{name}</span>{' '}
             {`is ${replaceText('one')} of ${replaceText('the best')}
             ${replaceText('exercises')} ${replaceText(
               'to target'

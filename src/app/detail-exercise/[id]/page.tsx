@@ -18,7 +18,6 @@ import {
 import { useEffect, useState } from 'react';
 import { SearchParamsType } from '../../page';
 import ExerciseVideos from '@/components/ExerciseVideos';
-import { useSearchParams } from 'next/navigation';
 
 type Props = {
   params: {
@@ -27,12 +26,10 @@ type Props = {
   searchParams: SearchParamsType['searchParams'];
 };
 //-------------------------------------------------
- function DetailExercise() {
-  const searchParamsAwaited=useSearchParams()
-  const id = searchParamsAwaited.get('id')
-  // const genre =searchParamsAwaited.get('genre'); 
-  const name= searchParamsAwaited.get('name'); 
-  console.log('params:',searchParamsAwaited);
+function DetailExercise({ searchParams, params }: Props) {
+  const { id } = params;
+  const { genre, name } = searchParams;
+  console.log('params:', params, genre);
 
   const exerciseName = name ?? 'back';
 

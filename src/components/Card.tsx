@@ -6,26 +6,26 @@ import { GenreType } from '@/app/page';
 
 type CardPropsType = {
   exercise: ExerciseDataType;
-  genre?: GenreType;
-  selectedName?: string;
+  genre: GenreType;
+  selectedName: string;
   cardOrder: number;
 };
 
 export default function Card({
   exercise,
-  // selectedName,
-  // genre,
+  selectedName,
+  genre,
   cardOrder,
 }: CardPropsType) {
   const {
-    // id,
+    id,
     bodyPart,
     gifUrl,
     name,
     target,
     secondaryMuscles,
-    // equipment,
-    // instructions,
+    equipment,
+    instructions,
   } = exercise;
   // console.log({ gifUrl });
 
@@ -61,7 +61,7 @@ export default function Card({
               className='sm:rounded-t-lg group-hover:opacity-75 transition-opacity duration-300 inline-block
               '
               alt={name}
-              loading='lazy'
+              // loading='lazy'
             />
           )}
         </div>

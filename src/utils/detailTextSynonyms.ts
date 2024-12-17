@@ -16,7 +16,7 @@ export const synonyms: { [key: string]: string[] } = {
   'will help': ['will help', 'will support', 'will aid'],
   improve: ['enhance', 'boost', 'improve'],
   your: ['your', '', 'the target:'],
-  mood: ['mood', 'spirits', 'frame of mind'],
+  mood: ['moode', 'spirits', 'frame of mind'],
   'gain energy': ['increase vitality', 'boost energy', 'gain energy'],
 };
 
