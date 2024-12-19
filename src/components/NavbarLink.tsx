@@ -7,6 +7,7 @@ type NavbarLinkPropsType = {
   param: string;
   title: string;
 };
+
 function NavbarLink({ param, title }: NavbarLinkPropsType) {
   const params = useSearchParams();
   const genre = params.get('genre');

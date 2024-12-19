@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 type LogoPropsType = {
@@ -13,7 +14,7 @@ function Logo({ title, logo, route }: LogoPropsType) {
         href={route}
         className='flex items-center justify-start gap-2 flex-auto'
       >
-        <img
+        <Image
           src={logo}
           width={60}
           height={60}

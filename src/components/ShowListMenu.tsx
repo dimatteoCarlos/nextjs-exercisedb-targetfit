@@ -3,7 +3,7 @@ import fetchData from '@/utils/fetchData';
 import {
   BASEURL_EXERCISEDB,
   exerciseOptions,
-  endpointList,
+  // endpointList,
 } from '@/utils/fetchConstants';
 
 import { ListItemType, SearchParamsType } from '@/app/page';
@@ -17,6 +17,7 @@ import exercisesTargetDataBackup from '../app/_data/targets/exerciseTarget_targe
 import { useRouter } from 'next/navigation';
 import { useExerciseData } from '@/context/ExercisesContextProvider';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export type ExerciseDataType = {
   id: string;
@@ -158,11 +159,14 @@ function ShowListMenu({
             >
               {item.name}
 
-              <img
+              <Image
                 src={imgUrl}
                 className='w-[7.5rem] h-[7.5rem] border-solid border-l-[8px] border-t-[12px] border-r-[2px] border-b-[1px] border-amber-600 rounded-full flex-shrink-0 min-w-[7.5rem]
                 group-hover:opacity-75 duration-300'
                 alt={`body_part_${item.name}`}
+                height={100}
+                width={100}
+                unoptimized
               />
             </div>
           );

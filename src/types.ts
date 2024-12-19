@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+// import { ReactNode } from 'react';
 
 //ShowListMenu.tsx
 export type ExerciseDataType = {
@@ -48,34 +48,34 @@ export type SearchParamsType = {
 export type GenreType = SearchParamsType['searchParams']['genre'];
 
 //----ExerciseContextProvider.tsx-----
-type ExerciseContextProviderPropType = {
-  children: ReactNode;
-};
+// type ExerciseContextProviderPropType = {
+//   children: ReactNode;
+// };
 
-type ExerciseDataContextType = {
-  exerciseData: ExerciseDataType[];
-  setExerciseData: (exerciseData: ExerciseDataType[]) => void;
-};
+// type ExerciseDataContextType = {
+//   exerciseData: ExerciseDataType[];
+//   setExerciseData: (exerciseData: ExerciseDataType[]) => void;
+// };
 
 //----ShowBannerImgSelected.tsx----------------
 
 export type SelectedKeyListType = SearchParamsType['searchParams']['genre'];
 
-export type BannerSelectionPropType = {
-  selectedKeyList: SelectedKeyListType;
-  selectedBannerGroup:
-    | 'menBannersKeyList'
-    | 'womenBannersKeyList'
-    | 'bannersKeyList'
-    | 'bannersKeyExercises'
-    | 'otherBannersKeyList';
-};
+// export type BannerSelectionPropType = {
+//   selectedKeyList: SelectedKeyListType;
+//   selectedBannerGroup:
+//     | 'menBannersKeyList'
+//     | 'womenBannersKeyList'
+//     | 'bannersKeyList'
+//     | 'bannersKeyExercises'
+//     | 'otherBannersKeyList';
+// };
 
 export type BannerOptionsType = {
   [key: string]: BannerKeyListType;
 };
 //---HeroBanner.tsx------------------------
-type HeroBannerPropsType = { selectedKeyList: SelectedKeyListType };
+// type HeroBannerPropsType = { selectedKeyList: SelectedKeyListType };
 
 //----------Card.tsx-----------------------------
 

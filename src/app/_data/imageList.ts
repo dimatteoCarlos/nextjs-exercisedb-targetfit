@@ -1,5 +1,5 @@
 export type ListImgType = {
-  [key: string]: { name: string; img: string } | {}[];
+  [key: string]: { name: string; img: string } | object[];
 };
 
 export const bodyPartListImg = {

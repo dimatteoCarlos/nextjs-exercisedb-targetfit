@@ -6,15 +6,20 @@ import { replaceText } from '@/utils/detailTextSynonyms';
 import { ExerciseDataType } from './ShowListMenu';
 import { useSearchParams } from 'next/navigation';
 import Loading from '@/app/loading';
+import Image from 'next/image';
+import { Suspense } from 'react';
 
 type DetailPropType = {
   detail: ExerciseDataType;
 };
 function Detail({ detail }: DetailPropType) {
   const searchParams = useSearchParams();
-  // Obtener los parámetros de búsqueda
-  const genre = searchParams.get('genre');
+  //Get the search params
   const selectedName = searchParams.get('name');
+  // const genre = searchParams.get('genre');
+
+
+
 
   const { bodyPart, gifUrl, name, target, equipment, instructions } = detail;
 
@@ -26,7 +31,7 @@ function Detail({ detail }: DetailPropType) {
     );
 
   return (
-    <>
+    <Suspense >
       <article
         className='card__detail flex justify-between  border-solid border-[0px] border-amber-600
         dark:bg-gray-700  dark:text-gray-300  bg-gray-200 text-gray-700
@@ -35,11 +40,15 @@ function Detail({ detail }: DetailPropType) {
           '
       >
         <div className='img__content shrink-0'>
-          <img
+          <Image
             className='rounded-lg w-full h-full md:max-h-[550px]'
             src={gifUrl}
             alt={name}
             loading='lazy'
+            width={100}
+            height={100}
+
+            unoptimized
           />
         </div>
 
@@ -90,7 +99,7 @@ function Detail({ detail }: DetailPropType) {
           </div>
         </div>
       </article>
-    </>
+    </Suspense>
   );
 }
 

@@ -67,7 +67,8 @@ const listImgBackup = {
 
 //--------------------
 export default async function Home({ searchParams }: SearchParamsType) {
-  const genre = searchParams?.genre;
+  const spAw = await searchParams;
+  const genre = spAw?.genre;
   const selectedKeyList = genre ? genre : 'bodyPart'; //start
   //-------API info -------------
   //------exercisedb endpoints -------

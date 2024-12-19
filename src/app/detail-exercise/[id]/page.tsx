@@ -16,8 +16,10 @@ import {
 } from '@/utils/fetchConstants';
 
 import { useEffect, useState } from 'react';
-import { SearchParamsType } from '../../page';
 import ExerciseVideos from '@/components/ExerciseVideos';
+import { SearchParamsType } from '../../page';
+import { useSearchParams } from 'next/navigation';
+import { GenreType } from '@/types';
 
 type Props = {
   params: {
@@ -26,10 +28,17 @@ type Props = {
   searchParams: SearchParamsType['searchParams'];
 };
 //-------------------------------------------------
-function DetailExercise({ searchParams, params }: Props) {
+// function DetailExercise({ searchParams, params }: Props) {
+function DetailExercise({params }: Props) {
   const { id } = params;
-  const { genre, name } = searchParams;
-  console.log('params:', params, genre);
+  // const { genre, name } = searchParams;
+  const searchParamsAwaited = useSearchParams();
+  const genre = searchParamsAwaited.get('genre') as GenreType;
+  const name = searchParamsAwaited.get('name');
+
+
+  
+  console.log('params:', params, genre, name);
 
   const exerciseName = name ?? 'back';
 
@@ -78,7 +87,7 @@ function DetailExercise({ searchParams, params }: Props) {
     }
 
     getDetailData();
-  }, [id]);
+  }, [exerciseUrl]);
 
   // console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
 
@@ -93,9 +102,12 @@ function DetailExercise({ searchParams, params }: Props) {
   useEffect(() => {
     async function getVideosData() {
       try {
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
+        if(typeof data=='object'){
         // console.log(data.next, 'NEXT');
-        setExerciseVideos(data.contents);
+        setExerciseVideos(data!.contents);
+      }
       } catch (error) {
         console.error('Error fetching videos:', error);
         setExerciseVideos(null);
@@ -103,7 +115,8 @@ function DetailExercise({ searchParams, params }: Props) {
     }
 
     getVideosData();
-  }, [exerciseName]);
+  }, [ videosUrl]);
+  // }, [exerciseName, videosUrl]);
 
   //--------------------------------------------------
   return (

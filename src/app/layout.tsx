@@ -37,12 +37,13 @@ export default function RootLayout({
 
         <link rel='preload' href='/assets/loaders/Spin.svg' as='image' />
 
-        <noscript>
+        {/* <noscript>
           <link
             rel='stylesheet'
             href='/_next/static/css/app/layout.css?v=1727798135398'
           />
-        </noscript>
+        </noscript> */}
+        
       </Head>
       
       <body className={`${font.className} antialiased`}>

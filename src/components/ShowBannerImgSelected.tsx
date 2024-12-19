@@ -10,6 +10,7 @@ import {
 } from '@/utils/bannersDefinition';
 
 import { SearchParamsType } from '@/app/page';
+import Image from 'next/image';
 
 export type SelectedKeyListType = SearchParamsType['searchParams']['genre'];
 
@@ -60,13 +61,15 @@ function ShowBannerImgSelected({
 
   return (
     <>
-      <img
+      <Image
         src={`${selectedBannerAddress}`}
         alt='hero-banner'
         className='object-cover 
             h-full w-full max-w-full
              md:rounded-bl-[12%]        
             '
+            width={1024}
+            height={1024}
       />
     </>
   );

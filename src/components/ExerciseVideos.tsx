@@ -2,6 +2,7 @@ import Loading from '@/app/loading';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// import Image from 'next/image';
 type ExerciseVideoType = {
   video: {
     videoId: string;
@@ -64,7 +65,7 @@ function ExerciseVideos({
 
             >
               <div className={'mt-2 py-4 '}>
-                <img
+                <Image
                   src={video.video.thumbnails[0].url}
                   alt={video.video.title}
                   width={500}

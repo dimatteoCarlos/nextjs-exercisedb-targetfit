@@ -22,15 +22,15 @@ const ThemeContext = createContext<ThemeContextType>({
   changeTheme: () => {},
 });
 
-const darkStyle = 'dark:text-gray-200 dark:bg-gray-700';
-const lightStyle = 'text-gray-700 bg-gray-200';
+// const darkStyle = 'dark:text-gray-200 dark:bg-gray-700';
+// const lightStyle = 'text-gray-700 bg-gray-200';
 
 function ThemeContextProvider({ children }: ThemeContextProviderPropsType) {
   const [theme, setTheme] = useState<ThemeType>('dark');
 
-  const toggleTheme = (theme: ThemeType) => {
-    return theme === 'dark' ? 'light' : 'dark';
-  };
+  // const toggleTheme = (theme: ThemeType) => {
+  //   return theme === 'dark' ? 'light' : 'dark';
+  // };
 
   const applyTheme = (newTheme: ThemeType) => {
     // const body = document.body;
