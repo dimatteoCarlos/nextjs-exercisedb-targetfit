@@ -34,6 +34,7 @@ export default function RootLayout({
           href='/_next/static/css/app/layout.css?v=1727798135398'
           as='style'
         />
+        <link rel="icon" href="/favicon.ico"/>
 
         <link rel='preload' href='/assets/loaders/Spin.svg' as='image' />
 
