@@ -18,7 +18,7 @@ import {
 import { useEffect, useState } from 'react';
 import ExerciseVideos from '@/components/ExerciseVideos';
 import { SearchParamsType } from '../../page';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { GenreType } from '@/types';
 
 type Props = {
@@ -27,25 +27,28 @@ type Props = {
   };
   searchParams: SearchParamsType['searchParams'];
 };
+const audioUrl = {
+  bodyPart: 'bgMusicBP.mp3',
+  equipment: 'bgMusicEQ.mp3',
+  targetMuscle: 'bgMusicTM.mp3',
+};
 //-------------------------------------------------
-// function DetailExercise({ searchParams, params }: Props) {
-function DetailExercise({params }: Props) {
+
+function DetailExercise({ params }: Props) {
   const { id } = params;
-  // const { genre, name } = searchParams;
   const searchParamsAwaited = useSearchParams();
-  const genre = searchParamsAwaited.get('genre') as GenreType;
   const name = searchParamsAwaited.get('name');
+  const genre = searchParamsAwaited.get('genre') as GenreType;
 
-
-  
-  console.log('params:', params, genre, name);
-
+  const pathname = usePathname();
   const exerciseName = name ?? 'back';
-
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
 
   const [exerciseVideos, setExerciseVideos] = useState<[] | null>([]);
+
+  const [audio] = useState(new Audio(`/assets/audio/${audioUrl[genre]}`));
+  audio.loop = true;
 
   //***************************************** */
   //---build exercise detail url---
@@ -58,15 +61,12 @@ function DetailExercise({params }: Props) {
     ) {
       if (Array.isArray(data)) {
         if (data.length > 0) {
-          // console.log('1', data);
           setExerciseDetailData(data[0]);
         } else {
-          // console.log('2', data);
           setExerciseDetailData(null);
         }
       } else {
         const isEmpty = Object.keys(data).length === 0;
-        // console.log('3', data);
 
         setExerciseDetailData(isEmpty ? null : data);
       }
@@ -78,7 +78,6 @@ function DetailExercise({params }: Props) {
           exerciseUrl,
           exerciseOptions
         );
-        // console.log(data);
         handleExerciseDetailData(data);
       } catch (error) {
         console.error('Error fetching exercise detail:', error);
@@ -88,6 +87,44 @@ function DetailExercise({params }: Props) {
 
     getDetailData();
   }, [exerciseUrl]);
+
+  //---------------------
+  //Route change and audio handler
+
+  function routeChangeHandler(pathname: string) {
+    if (pathname.includes('detail-exercise')) {
+      if (audio.paused) {
+        audio.play().catch((error) => {
+          console.error('Error playing audio:', error);
+        });
+      }
+    } else {
+      if (!audio.paused) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    }
+  }
+
+  function visibilityChangeHandler() {
+    console.log('visibility', document.visibilityState);
+    if (document.hidden) {
+      audio.pause();
+    } else {
+      routeChangeHandler(pathname);
+    }
+  }
+
+  useEffect(() => {
+    routeChangeHandler(pathname);
+    document.addEventListener('visibilitychange', visibilityChangeHandler);
+
+    return () => {
+      document.removeEventListener('visibilitychange', visibilityChangeHandler);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, [pathname, audio]);
 
   // console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
 
@@ -102,12 +139,12 @@ function DetailExercise({params }: Props) {
   useEffect(() => {
     async function getVideosData() {
       try {
-     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
-        if(typeof data=='object'){
-        // console.log(data.next, 'NEXT');
-        setExerciseVideos(data!.contents);
-      }
+        if (typeof data == 'object') {
+          // console.log(data.next, 'NEXT');
+          setExerciseVideos(data!.contents);
+        }
       } catch (error) {
         console.error('Error fetching videos:', error);
         setExerciseVideos(null);
@@ -115,7 +152,7 @@ function DetailExercise({params }: Props) {
     }
 
     getVideosData();
-  }, [ videosUrl]);
+  }, [videosUrl]);
   // }, [exerciseName, videosUrl]);
 
   //--------------------------------------------------
