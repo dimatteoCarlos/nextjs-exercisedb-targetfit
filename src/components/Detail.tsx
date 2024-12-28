@@ -57,7 +57,7 @@ function Detail({ detail, isMuted, setIsMuted, audio }: DetailPropType) {
           />
 
           <span
-            className='sound__icon--content absolute top-[0.5rem] right-[0.15rem] z-2 h-[2rem] w-[2rem] bordered cursor-pointer'
+            className='sound__icon--content absolute top-[0.5rem] right-[0.15rem] z-2 h-[2rem] w-[2rem] cursor-pointer'
             onClick={muteHandler}
           >
             {/* <span className='text-red-500'>{isMuted.toString()}</span> */}

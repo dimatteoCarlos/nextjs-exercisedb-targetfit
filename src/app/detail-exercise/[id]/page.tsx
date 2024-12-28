@@ -27,6 +27,7 @@ type Props = {
   };
   searchParams: SearchParamsType['searchParams'];
 };
+
 const audioUrl = {
   bodyPart: 'bgMusicBP.mp3',
   equipment: 'bgMusicEQ.mp3',
@@ -47,14 +48,14 @@ function DetailExercise({ params }: Props) {
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
   const [exerciseVideos, setExerciseVideos] = useState<[] | null>([]);
-
+  
+  const [isMuted, setIsMuted] = useState(false);
   const audio = useMemo(
     () => new Audio(`/assets/audio/${audioUrl[genre]}`),
     [genre]
   );
   audio.loop = true;
 
-  const [isMuted, setIsMuted] = useState(false);
 
   //***************************************** */
   //---build exercise detail url---
