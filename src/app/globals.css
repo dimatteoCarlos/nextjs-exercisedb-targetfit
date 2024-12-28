@@ -36,6 +36,13 @@ body {
   background: #4b5563; /* Color de fondo de la pista */
 }
 
+
+.bordered{
+  border: 1px solid yellow;
+}
+
+
+
 /*
 breakpoint reminder
 sm: 640px

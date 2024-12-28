@@ -1,4 +1,0 @@
-#root > div > div.relative > div.rtl\:lg\:pr-\[94px\].ltr\:lg\:pl-\[94px\] > div.px-4.sm\:px-8.py-4.sm\:py-6.min-h-screen > main > div > div.-mt-8.lg\:mt-0.min-h-screen > div.lg\:gap-x-6.lg\:grid.lg\:grid-cols-10.justify-between > div.lg\:col-span-3.hidden.lg\:inline-block > div > section > form > div.my-6 > div > div.hidden.lg\:flex.w-full.justify-center > div > svg:nth-child(2)
-
-document.querySelector("#root > div > div.relative > div.rtl\\:lg\\:pr-\\[94px\\].ltr\\:lg\\:pl-\\[94px\\] > div.px-4.sm\\:px-8.py-4.sm\\:py-6.min-h-screen > main > div > div.-mt-8.lg\\:mt-0.min-h-screen > div.lg\\:gap-x-6.lg\\:grid.lg\\:grid-cols-10.justify-between > div.lg\\:col-span-3.hidden.lg\\:inline-block > div > section > form > div.my-6 > div > div.hidden.lg\\:flex.w-full.justify-center > div > svg:nth-child(2)")
-

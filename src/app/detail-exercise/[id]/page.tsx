@@ -15,7 +15,7 @@ import {
   endpointYTSD,
 } from '@/utils/fetchConstants';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ExerciseVideos from '@/components/ExerciseVideos';
 import { SearchParamsType } from '../../page';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -42,13 +42,19 @@ function DetailExercise({ params }: Props) {
 
   const pathname = usePathname();
   const exerciseName = name ?? 'back';
+
+  //states
   const [exerciseDetailData, setExerciseDetailData] =
     useState<ExerciseDataType | null>(null);
-
   const [exerciseVideos, setExerciseVideos] = useState<[] | null>([]);
 
-  const [audio] = useState(new Audio(`/assets/audio/${audioUrl[genre]}`));
+  const audio = useMemo(
+    () => new Audio(`/assets/audio/${audioUrl[genre]}`),
+    [genre]
+  );
   audio.loop = true;
+
+  const [isMuted, setIsMuted] = useState(false);
 
   //***************************************** */
   //---build exercise detail url---
@@ -60,6 +66,7 @@ function DetailExercise({ params }: Props) {
       data: ExerciseDataType | ExerciseDataType[]
     ) {
       if (Array.isArray(data)) {
+        //setExerciseDetailData(data[0]||null)
         if (data.length > 0) {
           setExerciseDetailData(data[0]);
         } else {
@@ -89,12 +96,38 @@ function DetailExercise({ params }: Props) {
   }, [exerciseUrl]);
 
   //---------------------
+  // console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
+  //******************************************/
+  //---build youtubevideos url---
+  //---youtubeSearchOptions,
+
+  const videosUrl = `${BASEURL_youtubeSearch}${endpointYTSD(exerciseName)}`;
+  // console.log('🚀 ~ DetailExercise ~ videosUrl:', videosUrl);
+
+  useEffect(() => {
+    async function getVideosData() {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
+        if (typeof data == 'object') {
+          // console.log(data.next, 'NEXT');
+          setExerciseVideos(data!.contents);
+        }
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+        setExerciseVideos(null);
+      }
+    }
+
+    getVideosData();
+  }, [videosUrl]);
+
   //Route change and audio handler
 
-  function routeChangeHandler(pathname: string) {
+  async function routeChangeHandler(pathname: string) {
     if (pathname.includes('detail-exercise')) {
-      if (audio.paused) {
-        audio.play().catch((error) => {
+      if (audio.paused && !isMuted) {
+        await audio.play().catch((error) => {
           console.error('Error playing audio:', error);
         });
       }
@@ -124,41 +157,19 @@ function DetailExercise({ params }: Props) {
       audio.pause();
       audio.currentTime = 0;
     };
-  }, [pathname, audio]);
-
-  // console.log('🚀 ~ DetailExercise ~ exerciseDetailData:', exerciseDetailData);
-
-  //******************************************/
-  //---build youtubevideos url---
-  // youtubeSearchOptions,
-
-  const videosUrl = `${BASEURL_youtubeSearch}${endpointYTSD(exerciseName)}`;
-
-  // console.log('🚀 ~ DetailExercise ~ videosUrl:', videosUrl);
-
-  useEffect(() => {
-    async function getVideosData() {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const data = await fetchData<any>(videosUrl, youtubeSearchOptions);
-        if (typeof data == 'object') {
-          // console.log(data.next, 'NEXT');
-          setExerciseVideos(data!.contents);
-        }
-      } catch (error) {
-        console.error('Error fetching videos:', error);
-        setExerciseVideos(null);
-      }
-    }
-
-    getVideosData();
-  }, [videosUrl]);
-  // }, [exerciseName, videosUrl]);
+  }, [pathname, audio, isMuted]);
 
   //--------------------------------------------------
   return (
     <section className='text-gray-800 dark:text-gray-200 dark:bg-gray-800'>
-      {exerciseDetailData && <Detail detail={exerciseDetailData} />}
+      {exerciseDetailData && (
+        <Detail
+          detail={exerciseDetailData}
+          isMuted={isMuted}
+          setIsMuted={setIsMuted}
+          audio={audio}
+        />
+      )}
 
       {exerciseVideos && (
         <ExerciseVideos
