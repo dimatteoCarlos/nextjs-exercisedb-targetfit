@@ -98,17 +98,17 @@ function Detail({ detail, isMuted, setIsMuted, audio }: DetailPropType) {
           </p>
 
           <div className=''>
-            <div className='flex flex-row gap-[32px] items-center justify-center '>
+            <div className='flex flex-row gap-4 md:gap-[32px] items-center justify-center '>
               Training{' '}
-              <span className='capitalize text-[1.5rem] xs:text-[20px] text-amber-500'>
+              <span className='capitalize text-[1.2rem] md :text-[175rrem] text-amber-500'>
                 {bodyPart}
               </span>
               for{' '}
-              <span className='capitalize text-[1.5rem] xs:text-[20px] text-amber-500'>
+              <span className='capitalize text-[1.2rem] md:text-[1.75rem] text-amber-500'>
                 {target}
               </span>
               with{' '}
-              <span className='capitalize text-[1.5rem] xs:text-[20px] text-amber-500'>
+              <span className='capitalize text-[1.2rem] md:text-[1.75rem] text-amber-500'>
                 {equipment}
               </span>
             </div>

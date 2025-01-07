@@ -6,8 +6,8 @@ export function replaceText(orig: string) {
 }
 
 export const synonyms: { [key: string]: string[] } = {
-  exercises: ['Workouts', 'Activities', 'Training'],
-  'keeps you': ['maintains you', 'keeps you', 'sustains you'],
+  exercises: ['Workouts', 'Activityies', 'Training', 'exercises'],
+  'keeps you': ['maintains you', 'keeps you', 'can keep you'],
   strong: ['fit', 'powerful', 'strong'],
   one: ['a single', 'one', 'one single'],
   'the best': ['the finest', 'the best', 'the greatest'],
