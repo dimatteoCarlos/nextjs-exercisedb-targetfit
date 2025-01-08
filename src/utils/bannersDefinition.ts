@@ -66,6 +66,7 @@ export const otherBannersKeyList: BannerKeyListType = {
   targetMuscle: '/images/banners/bannerMenBodyParts.png',
   explore: '/images/banners/bannerExplorer.png',
 };
+
 export const onlyWomenBannersKeyList: BannerKeyListType = {
   bodyPart: '/images/banners/bannerWomanBodyParts.png',
   equipment: '/images/banners/womanMuscleExercising.png',
